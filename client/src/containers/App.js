@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Appointment from './Appointment'
+// import Appointment from './Appointment'
+import List from './List'
 
 class App extends Component {
   state = {
-    response: {}
+    response: []
   }
 
   componentDidMount() {
@@ -26,18 +27,14 @@ class App extends Component {
   render() {
 
     const { response } = this.state
+    console.log(response)
 
     return (
       <div className="App">
-        <h1>{JSON.stringify(this.state.response, null, 2)}</h1>
-        
-        <Appointment 
-        client={response.client}
-        date={response.date}
-        length={response.length}
-        booked_on={response.booked_on} />
+        <List response={response}/>
       </div>
     );
+  
   }
 }
 

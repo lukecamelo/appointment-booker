@@ -8,11 +8,25 @@ let yyyy = today.getFullYear()
 today = mm + '/' + dd + '/' + yyyy
 tomorrow = mm + '/' + dd2 + '/' + yyyy
 
-const appointment = {
-  client: "Luke Camelo",
-  date: tomorrow,
-  length: 45,
-  booked_on: today
-}
+const appointments = [
+  {
+    client: "Luke Camelo",
+    date: tomorrow,
+    duration: 45,
+    booked_on: today
+  },
+  {
+    client: "Shawn Mars",
+    date: tomorrow,
+    duration: 30,
+    booked_on: today
+  },
+  {
+    client: "Leonardo DiCaprio",
+    date: tomorrow,
+    duration: 60,
+    booked_on: today
+  }
+] 
 
-module.exports = appointment
+module.exports = appointments
