@@ -3,17 +3,18 @@ import './App.css';
 
 class App extends Component {
   state = {
-    response: ''
+    response: {}
   }
 
   componentDidMount() {
     this.callApi()
       .then(res => this.setState({response: res.express}))
       .catch(err => console.log(err))
+    console.log(this.state.response)
   }
 
   callApi = async () => {
-    const response = await fetch('/api/hello')
+    const response = await fetch('/api/appointments')
     const body = await response.json()
 
     if (response.status !== 200) throw Error(body.message)
@@ -24,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>{this.state.response}</h1>
+        <h1>{JSON.stringify(this.state.response, null, 2)}</h1>
       </div>
     );
   }
