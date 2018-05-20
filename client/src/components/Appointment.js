@@ -3,13 +3,14 @@ import React from 'react'
 class Appointment extends React.Component {
 
   render() {
-    return (
-      <div>
-        <h2>Client: {this.props.client}</h2>
-        <h3>Date booked: {this.props.date}</h3>
-        <h3>Duration booked: {this.props.duration}</h3>
-        <h3>Scheduled on: {this.props.booked_on}</h3>
-      </div>
+    return (  
+      <tr className='Appointment'>
+        <th>{this.props.ID}</th>
+        <td>{this.props.client}</td>
+        <td>{this.props.date}</td>
+        <td>{this.props.duration}</td>
+        <td>{this.props.booked_on}</td>
+      </tr>     
     )
   }
 }

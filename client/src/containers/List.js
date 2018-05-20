@@ -2,6 +2,7 @@ import React from 'react'
 import Appointment from '../components/Appointment'
 
 class List extends React.Component {
+
   render() {
     
     let appointments
@@ -11,7 +12,8 @@ class List extends React.Component {
       appointments = this.props.response.map((obj, i) => {
         return (
           <Appointment
-          key={i} 
+          key={i}
+          ID={i} 
           client={obj.client}
           date={obj.date}
           duration={obj.duration}
@@ -29,7 +31,20 @@ class List extends React.Component {
 
     return (
       <div className="List">
-        {appointments}
+      <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Client</th>
+              <th>Date booked</th>
+              <th>Duration booked</th>
+              <th>Booked on</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.response.length ? appointments : null}
+          </tbody>
+        </table>
       </div>
     )
   }
