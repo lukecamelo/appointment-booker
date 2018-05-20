@@ -1,7 +1,8 @@
 let today = new Date()
 let tomorrow = new Date()
+
 let dd = today.getDate()
-let dd2 = today.getDate()+5
+let dd2 = today.getDate()+3
 let mm = today.getMonth()+1 //January is 0!
 let yyyy = today.getFullYear()
 
@@ -17,13 +18,13 @@ const appointments = [
   },
   {
     client: "Shawn Mars",
-    date: tomorrow,
+    date: "5/12/2018",
     duration: 30,
     booked_on: today
   },
   {
     client: "Leonardo DiCaprio",
-    date: tomorrow,
+    date: "5/15/2018",
     duration: 60,
     booked_on: today
   }
