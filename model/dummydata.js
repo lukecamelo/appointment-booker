@@ -14,7 +14,7 @@ const appointments = [
     client: "Luke Camelo",
     date: tomorrow,
     duration: 45,
-    booked_on: today
+    booked_on: "5/12/2018"
   },
   {
     client: "Shawn Mars",

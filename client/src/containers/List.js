@@ -3,7 +3,7 @@ import Appointment from '../components/Appointment'
 
 class List extends React.Component {
   render() {
-
+    
     let appointments
 
     if (this.props.response.length) {
@@ -23,11 +23,9 @@ class List extends React.Component {
         let partsA = a.props.date.split("/")
         let partsB = b.props.date.split("/")
         return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
-        // console.log(a.props.date)
-        // return a.date - b.date
       })
+    
     } 
-
 
     return (
       <div className="List">
