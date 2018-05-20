@@ -2,9 +2,21 @@ import React from 'react'
 import Appointment from '../components/Appointment'
 
 class List extends React.Component {
+  state = {
+    sortByDate: true
+  }
+
+  changeSorting = () => {
+    if (this.state.sortByDate === true) {
+      this.setState({sortByDate: false})
+    } else {
+      this.setState({sortByDate: true})
+    }
+    console.log(this.state.sortByDate)
+  }
 
   render() {
-    
+
     let appointments
 
     if (this.props.response.length) {
@@ -21,17 +33,23 @@ class List extends React.Component {
         )
       })
 
-      appointments.sort((a, b) => {
-        let partsA = a.props.date.split("/")
-        let partsB = b.props.date.split("/")
-        return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
-      })
+      if(this.state.sortByDate) {
+        appointments.sort((a, b) => {
+          let partsA = a.props.date.split("/")
+          let partsB = b.props.date.split("/")
+          return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
+        })
+      } else {
+        appointments.sort((a, b) => {
+          return a.props.ID - b.props.ID
+        })
+      }
     
     } 
 
     return (
-      <div className="List">
-      <table className="table">
+      <div className="List container">
+        <table className="table is-bordered is-striped is-hoverable has-text-centered">
           <thead>
             <tr>
               <th>ID</th>
@@ -45,6 +63,9 @@ class List extends React.Component {
             {this.props.response.length ? appointments : null}
           </tbody>
         </table>
+        <button 
+        className='button is-primary'
+        onClick={this.changeSorting}>Change sorting!</button>
       </div>
     )
   }
