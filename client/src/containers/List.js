@@ -3,7 +3,7 @@ import Appointment from '../components/Appointment'
 
 class List extends React.Component {
   state = {
-    sortByDate: true
+    sortBy: 'id'
   }
 
   changeSorting = () => {
@@ -15,8 +15,14 @@ class List extends React.Component {
     console.log(this.state.sortByDate)
   }
 
+  handleSelect = (e) => {
+    this.setState({sortBy: e.target.value})
+    console.log(this.state.sortBy)
+  }
+
   render() {
 
+    let { sortBy } = this.state
     let appointments
 
     if (this.props.response.length) {
@@ -33,15 +39,19 @@ class List extends React.Component {
         )
       })
 
-      if(this.state.sortByDate) {
+      if(sortBy === 'date') {
         appointments.sort((a, b) => {
           let partsA = a.props.date.split("/")
           let partsB = b.props.date.split("/")
           return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
         })
-      } else {
+      } else if (sortBy === 'id') {
         appointments.sort((a, b) => {
           return a.props.ID - b.props.ID
+        })
+      } else if (sortBy === 'duration') {
+        appointments.sort((a, b) => {
+          return a.props.duration - b.props.duration
         })
       }
     
@@ -63,9 +73,18 @@ class List extends React.Component {
             {this.props.response.length ? appointments : null}
           </tbody>
         </table>
+
         <button 
         className='button is-primary'
         onClick={this.changeSorting}>Change sorting!</button>
+
+        <div className="select">
+          <select onChange={this.handleSelect}>
+            <option value="id">ID</option>
+            <option value="date">Date</option>
+            <option value="duration">Duration</option>
+          </select>
+        </div>
       </div>
     )
   }
