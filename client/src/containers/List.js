@@ -74,10 +74,6 @@ class List extends React.Component {
           </tbody>
         </table>
 
-        <button 
-        className='button is-primary'
-        onClick={this.changeSorting}>Change sorting!</button>
-
         <div className="select">
           <select onChange={this.handleSelect}>
             <option value="id">ID</option>
