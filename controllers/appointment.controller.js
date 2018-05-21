@@ -28,4 +28,5 @@ function newAppointment(req, res) {
     if(err)
     throw err
   })
+  res.redirect('/')
 }
