@@ -7,12 +7,18 @@ import List from './List'
 
 class App extends Component {
   state = {
-    response: []
+    success: false,
+    message: '',
+    appointments: []
   }
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({response: res.message}))
+      .then(res => this.setState({
+        success: res.success,
+        message: res.message,
+        appointments: res.appoint
+      }))
       .catch(err => console.log(err))
   }
 
@@ -27,12 +33,15 @@ class App extends Component {
 
   render() {
 
-    const { response } = this.state
-    console.log(response)
+    const { success, message, appointments } = this.state
+
+    if (success === true) {
+      console.log(success, message, appointments)
+    }
 
     return (
       <div className="App">
-        {Array.isArray(response) ? <List response={response}/> : <div> Nothing here.</div>}
+        {appointments.length > 0 ? <List response={appointments}/> : <h1 className='title'>{message}</h1>}
       </div>
     );
   
