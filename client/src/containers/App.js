@@ -4,6 +4,7 @@ import './App.css';
 
 // import Appointment from './Appointment'
 import List from './List'
+import AppointmentForm from '../components/AppointmentForm'
 
 class App extends Component {
   state = {
@@ -42,6 +43,7 @@ class App extends Component {
     return (
       <div className="App">
         {appointments.length > 0 ? <List response={appointments}/> : <h1 className='title'>{message}</h1>}
+        <AppointmentForm/>
       </div>
     );
   

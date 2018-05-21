@@ -1,11 +1,14 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+
 const dummy_appointment = require('./model/dummydata')
 
 const appointmentController = require('./controllers/appointment.controller')
 
 const app = express()
 const routes = require('./routes')
+app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = process.env.PORT || 8080
 

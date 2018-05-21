@@ -3,9 +3,9 @@ const Schema = mongoose.Schema
 
 const appointmentSchema = new Schema({
   client: String,
-  date: Date,
+  date: String,
   duration: Number,
-  booked_on: Date
+  booked_on: String
 })
 
 const Appointment = mongoose.model('Appointment', appointmentSchema)

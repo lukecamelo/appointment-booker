@@ -1,18 +1,15 @@
 import React from 'react'
 
-class Appointment extends React.Component {
-
-  render() {
+const Appointment = (props) => {
     return (  
       <tr className='Appointment'>
-        <th>{this.props.ID}</th>
-        <td>{this.props.client}</td>
-        <td>{this.props.date}</td>
-        <td>{this.props.duration} minutes</td>
-        <td>{this.props.booked_on}</td>
+        <th>{props.ID}</th>
+        <td>{props.client}</td>
+        <td>{props.date}</td>
+        <td>{props.duration} minutes</td>
+        <td>{props.booked_on}</td>
       </tr>     
     )
-  }
 }
 
 export default Appointment
