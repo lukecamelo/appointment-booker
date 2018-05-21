@@ -9,6 +9,7 @@
   "dependencies": {
     "bulma": "^0.7.1",
     "express": "^4.16.2",
+    "moment": "^2.22.1",
     "mongoose": "^5.1.1"
   },
   "devDependencies": {

@@ -1,18 +1,12 @@
 import React from 'react'
 import Appointment from '../components/Appointment'
+import moment from 'moment'
+
+import './List.css'
 
 class List extends React.Component {
   state = {
     sortBy: 'id'
-  }
-
-  changeSorting = () => {
-    if (this.state.sortByDate === true) {
-      this.setState({sortByDate: false})
-    } else {
-      this.setState({sortByDate: true})
-    }
-    console.log(this.state.sortByDate)
   }
 
   handleSelect = (e) => {
@@ -59,7 +53,7 @@ class List extends React.Component {
 
     return (
       <div className="List container">
-        <table className="table is-bordered is-striped is-hoverable has-text-centered">
+        <table className="table is-bordered is-striped is-hoverable has-text-centered appointments">
           <thead>
             <tr>
               <th>ID</th>
@@ -81,6 +75,7 @@ class List extends React.Component {
             <option value="duration">Duration</option>
           </select>
         </div>
+
       </div>
     )
   }
