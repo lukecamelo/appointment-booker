@@ -32,7 +32,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <List response={response}/>
+        {Array.isArray(response) ? <List response={response}/> : <div> Nothing here.</div>}
       </div>
     );
   
