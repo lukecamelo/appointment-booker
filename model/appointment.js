@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const appointmentSchema = new Schema({
   client: String,
   date: Date,
-  length: Number,
+  duration: Number,
   booked_at: Date
 })
 

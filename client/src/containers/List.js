@@ -1,6 +1,5 @@
 import React from 'react'
 import Appointment from '../components/Appointment'
-import moment from 'moment'
 
 import './List.css'
 
