@@ -1,28 +1,31 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class Appointment extends Component {
 
     componentDidMount() {
       this.deleteAppointment()
+      console.log(this.props.appointment._id)
     }
 
     deleteAppointment = async () => {
       const consoleMessage = await fetch('/api/realdata/hello', {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-        // body: JSON.stringify({})
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({id: this.props.appointment._id}, null, 2)
       })
-      return consoleMessage
+      const content = await consoleMessage.json()
+      console.log('hey this is' + content)
     }
 
   render() {
+    const { client, date, duration, booked_on } = this.props.appointment
     return (  
       <tr className='Appointment'>
-        <th>{this.props.ID}</th>
-        <td>{this.props.client}</td>
-        <td>{this.props.date}</td>
-        <td>{this.props.duration} minutes</td>
-        <td>{this.props.booked_on}</td>
+        <th>{this.props.id}</th>
+        <td>{client}</td>
+        <td>{date}</td>
+        <td>{duration} minutes</td>
+        <td>{booked_on}</td>
       </tr>     
     )
   }

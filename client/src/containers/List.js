@@ -24,11 +24,8 @@ class List extends React.Component {
         return (
           <Appointment
           key={i}
-          ID={i} 
-          client={obj.client}
-          date={obj.date}
-          duration={obj.duration}
-          booked_on={obj.booked_on} />
+          id={i}
+          appointment={obj} />
         )
       })
 

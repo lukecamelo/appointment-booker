@@ -34,5 +34,5 @@ function newAppointment(req, res) {
 }
 
 function deleteAppointment(req, res) {
-  console.log(JSON.stringify(req, null, 2))
+  console.log(req.body.id)
 }
