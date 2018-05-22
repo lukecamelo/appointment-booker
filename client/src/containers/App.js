@@ -42,6 +42,7 @@ class App extends Component {
       let appointments = [...this.state.appointments]
       appointments = appointments.filter(appointment => appointment._id !== appointment_id)
       this.setState({ appointments })
+      console.log(res.status)
     })
 
   }
