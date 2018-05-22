@@ -32,6 +32,20 @@ class App extends Component {
     return body
   }
 
+  deleteAppointment = async (appointment_id) => {
+    const consoleMessage = await fetch('/api/realdata/hello', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({id: appointment_id})
+    })
+    .then((res) => {
+      let appointments = [...this.state.appointments]
+      appointments = appointments.filter(appointment => appointment._id !== appointment_id)
+      this.setState({ appointments })
+    })
+
+  }
+
   render() {
 
     const { success, message, appointments } = this.state
@@ -42,7 +56,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        {appointments.length > 0 ? <List response={appointments}/> : <h1 className='title'>{message}</h1>}
+        {appointments.length > 0 ? <List response={appointments} delete={this.deleteAppointment}/> : <h1 className='title'>{message}</h1>}
         <AppointmentForm/>
       </div>
     );

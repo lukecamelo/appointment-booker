@@ -25,7 +25,8 @@ class List extends React.Component {
           <Appointment
           key={i}
           id={i}
-          appointment={obj} />
+          appointment={obj}
+          delete={this.props.delete} />
         )
       })
 

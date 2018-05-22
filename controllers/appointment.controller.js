@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Appointment = require('../model/appointment')
+const moment = require('moment')
 
 module.exports = {
   getAppointments: getAppointments,
@@ -18,11 +19,14 @@ function getAppointments(req, res) {
 }
 
 function newAppointment(req, res) {
+  
+  let tempDate = moment()
+
   const appointment = new Appointment({
     client: req.body.client,
-    date: "1/00/2018",
+    date: req.body.date,
     duration: req.body.duration,
-    booked_on: "12/31/2017"
+    booked_on: tempDate
   })
 
   appointment.save((err) => {

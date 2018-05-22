@@ -26,6 +26,13 @@ const AppointmentForm = (props) => {
           </div>
         </div>
 
+        <div className="field">
+          <label className="label is-one-quarter column">Date</label>
+          <div className="control is-one-quarter column">
+            <input type="date" name='date' className="input date-input"/>
+          </div>
+        </div>
+
         <button className='button is-info' type='submit'>Add!</button>
       </form>
     </div>

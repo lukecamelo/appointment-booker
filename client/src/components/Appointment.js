@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 
 class Appointment extends Component {
 
-    componentDidMount() {
-      // this.deleteAppointment()
-      console.log(this.props.appointment._id)
-    }
+    // componentDidMount() {
+    //   // this.deleteAppointment()
+    //   console.log(this.props.appointment._id)
+    // }
 
-    deleteAppointment = async () => {
-      const consoleMessage = await fetch('/api/realdata/hello', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({id: this.props.appointment._id})
-      })
-    }
+  // deleteAppointment = async () => {
+  //   const consoleMessage = await fetch('/api/realdata/hello', {
+  //     method: 'POST',
+  //     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({id: this.props.appointment._id})
+  //   })
+
+  // }
 
   render() {
 
@@ -27,7 +28,7 @@ class Appointment extends Component {
         <td>{date}</td>
         <td>{duration} minutes</td>
         <td>{booked_on}</td>
-        <td><a className='button is-danger' onClick={this.deleteAppointment}>Delete</a></td>
+        <td><a className='button is-danger' onClick={() => this.props.delete(this.props.appointment._id)}>Delete</a></td>
       </tr>     
 
     )
