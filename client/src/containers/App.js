@@ -10,7 +10,8 @@ class App extends Component {
   state = {
     success: false,
     message: '',
-    appointments: []
+    appointments: [],
+    response: 'N/A'
   }
 
   componentDidMount() {
@@ -41,8 +42,8 @@ class App extends Component {
     .then((res) => {
       let appointments = [...this.state.appointments]
       appointments = appointments.filter(appointment => appointment._id !== appointment_id)
-      this.setState({ appointments })
-      console.log(res.status)
+      this.setState({ appointments, response: res.status })
+      console.log(this.state.response)
     })
 
   }
@@ -57,7 +58,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        {appointments.length > 0 ? <List response={appointments} delete={this.deleteAppointment}/> : <h1 className='title'>{message}</h1>}
+        {appointments.length > 0 ? <List response={appointments} deleteAppointment={this.deleteAppointment}/> : <h1 className='title'>{message}</h1>}
         <AppointmentForm/>
       </div>
     );

@@ -16,9 +16,10 @@ class List extends React.Component {
   render() {
 
     let { sortBy } = this.state
+    const { deleteAppointment, response } = this.props
     let appointments
 
-    if (this.props.response.length) {
+    if (response.length) {
 
       appointments = this.props.response.map((obj, i) => {
         return (
@@ -26,15 +27,17 @@ class List extends React.Component {
           key={i}
           id={i}
           appointment={obj}
-          delete={this.props.delete} />
+          deleteAppointment={deleteAppointment} />
         )
       })
 
       if(sortBy === 'date') {
 
+        // Doesn't work properly.
+        
         // appointments.sort((a, b) => {
-        //   let partsA = a.props.date.split("/")
-        //   let partsB = b.props.date.split("/")
+        //   let partsA = a.props.appointment.date.split("-")
+        //   let partsB = b.props.appointment.date.split("-")
         //   return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
         // })
 
