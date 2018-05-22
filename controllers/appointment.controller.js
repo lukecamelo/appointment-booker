@@ -3,7 +3,9 @@ const Appointment = require('../model/appointment')
 
 module.exports = {
   getAppointments: getAppointments,
-  newAppointment: newAppointment
+  newAppointment: newAppointment,
+  getAppointment: getAppointment,
+  deleteAppointment: deleteAppointment
 }
 
 function getAppointments(req, res) {
@@ -28,5 +30,26 @@ function newAppointment(req, res) {
     if(err)
     throw err
   })
+
   res.redirect('/')
+}
+
+function getAppointment(req, res) {
+  Appointment.find({_id: req.params.id}).exec((err, appoint) => {
+    if(err) {
+      return res.json({'success':false, 'message':'Some Error'})
+    }
+    if(appoint.length) {
+      return res.json({'success': true, 'message': 'Found appointment by id', appoint})
+    }
+  }) 
+}
+
+function deleteAppointment(req, res) {
+  Appointment.findByIdAndRemove(req.params.id, (err, appoint) => {
+    if(err) {
+      return res.json({'success': false,'message': 'Could not delete'})
+    }
+    return res.json({'success': true, 'message': 'Appointment removed.'})
+  })
 }
