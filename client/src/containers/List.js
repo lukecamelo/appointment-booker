@@ -32,11 +32,11 @@ class List extends React.Component {
 
       if(sortBy === 'date') {
 
-        appointments.sort((a, b) => {
-          let partsA = a.props.date.split("/")
-          let partsB = b.props.date.split("/")
-          return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
-        })
+        // appointments.sort((a, b) => {
+        //   let partsA = a.props.date.split("/")
+        //   let partsB = b.props.date.split("/")
+        //   return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
+        // })
 
       } else if (sortBy === 'id') {
 
@@ -47,7 +47,7 @@ class List extends React.Component {
       } else if (sortBy === 'duration') {
 
         appointments.sort((a, b) => {
-          return a.props.duration - b.props.duration
+          return a.props.appointment.duration - b.props.appointment.duration
         })
         
       }
