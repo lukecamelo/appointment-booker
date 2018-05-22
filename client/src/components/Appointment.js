@@ -1,17 +1,5 @@
 import React, {Component} from 'react'
 
-<<<<<<< HEAD
-const Appointment = (props) => {
-    let duration = props.duration
-    return (  
-      <tr className='Appointment'>
-        <th>{props.ID}</th>
-        <td>{props.client}</td>
-        <td>{props.date}</td>
-        <td>{props.duration} minutes</td>
-        <td>{props.booked_on}</td>
-        <td><a href='/:id' className='button is-danger'>Delete</a></td>
-=======
 class Appointment extends Component {
 
     componentDidMount() {
@@ -35,7 +23,6 @@ class Appointment extends Component {
         <td>{this.props.date}</td>
         <td>{this.props.duration} minutes</td>
         <td>{this.props.booked_on}</td>
->>>>>>> 27d6f2c
       </tr>     
     )
   }
