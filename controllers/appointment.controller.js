@@ -3,7 +3,8 @@ const Appointment = require('../model/appointment')
 
 module.exports = {
   getAppointments: getAppointments,
-  newAppointment: newAppointment
+  newAppointment: newAppointment,
+  deleteAppointment: deleteAppointment
 }
 
 function getAppointments(req, res) {
@@ -29,4 +30,8 @@ function newAppointment(req, res) {
     throw err
   })
   res.redirect('/')
+}
+
+function deleteAppointment(req, res) {
+  console.log(JSON.stringify(req, null, 2))
 }
