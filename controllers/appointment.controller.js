@@ -34,5 +34,9 @@ function newAppointment(req, res) {
 }
 
 function deleteAppointment(req, res) {
-  console.log(req.body.id)
+  Appointment.deleteOne({_id: req.body.id}, (err) => {
+    if (err)
+      throw err
+  })
+  res.redirect('/')
 }

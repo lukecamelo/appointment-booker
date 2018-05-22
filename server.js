@@ -9,6 +9,7 @@ const appointmentController = require('./controllers/appointment.controller')
 const app = express()
 const routes = require('./routes')
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 const port = process.env.PORT || 8080
 
