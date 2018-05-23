@@ -14,6 +14,8 @@ app.use(bodyParser.json())
 const port = process.env.PORT || 8080
 
 mongoose.connect('mongodb://lukecamelo:password@ds117509.mlab.com:17509/appointment_db')
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
 
 app.use('/api', routes)
 

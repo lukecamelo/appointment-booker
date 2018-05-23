@@ -7,7 +7,7 @@ router.route('/realdata')
   .get(appointmentController.getAppointments)
   .post(appointmentController.newAppointment)
 
-router.route('/realdata/hello')
+router.route('/realdata/delete')
   .post(appointmentController.deleteAppointment)
 
 module.exports = router

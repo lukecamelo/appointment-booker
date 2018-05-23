@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import 'bulma/css/bulma.css'
 import './App.css';
 
-// import Appointment from './Appointment'
 import List from './List'
 import AppointmentForm from '../components/AppointmentForm'
 
@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   deleteAppointment = async (appointment_id) => {
-    const consoleMessage = await fetch('/api/realdata/hello', {
+    await fetch('/api/realdata/delete', {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({id: appointment_id})
@@ -42,7 +42,7 @@ class App extends Component {
     .then((res) => {
       let appointments = [...this.state.appointments]
       appointments = appointments.filter(appointment => appointment._id !== appointment_id)
-      this.setState({ appointments, response: res.status })
+      this.setState({ appointments: appointments, response: res.status })
       console.log(this.state.response)
     })
 
@@ -59,7 +59,7 @@ class App extends Component {
     return (
       <div className="App">
         {appointments.length > 0 ? <List response={appointments} deleteAppointment={this.deleteAppointment}/> : <h1 className='title'>{message}</h1>}
-        <AppointmentForm/>
+        <Link className='button is-primary' to='/form'>Create new Appointment</Link>
       </div>
     );
   

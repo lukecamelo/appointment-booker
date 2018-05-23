@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import './AppointmentForm.css'
 
 const AppointmentForm = (props) => {
@@ -35,6 +37,7 @@ const AppointmentForm = (props) => {
 
         <button className='button is-info' type='submit'>Add!</button>
       </form>
+      <Link className='button is-primary' to='/'>Back</Link>
     </div>
   )
 }
