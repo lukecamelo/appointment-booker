@@ -12,6 +12,7 @@ ReactDOM.render(
     <Switch>
       <Route exact path='/' component={App} />
       <Route exact path='/form' render={AppointmentForm} />
+      <Route path='/appointments/:id' component={UpdateForm} />
     </Switch>
   </BrowserRouter>
 , document.getElementById('root'));
