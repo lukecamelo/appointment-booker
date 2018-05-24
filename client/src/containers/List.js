@@ -16,7 +16,7 @@ class List extends React.Component {
   render() {
 
     let { sortBy } = this.state
-    const { deleteAppointment, response } = this.props
+    const { deleteAppointment, response, update } = this.props
     let appointments
 
     if (response.length) {
@@ -27,7 +27,8 @@ class List extends React.Component {
           key={i}
           id={i}
           appointment={obj}
-          deleteAppointment={deleteAppointment} />
+          deleteAppointment={deleteAppointment}
+          update={update} />
         )
       })
 

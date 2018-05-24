@@ -4,7 +4,7 @@ import 'bulma/css/bulma.css'
 import './App.css';
 
 import List from './List'
-import AppointmentForm from '../components/AppointmentForm'
+// import AppointmentForm from '../components/AppointmentForm'
 
 class App extends Component {
   state = {
@@ -33,19 +33,29 @@ class App extends Component {
     return body
   }
 
-  deleteAppointment = async (appointment_id) => {
-    await fetch('/api/realdata/delete', {
+  deleteAppointment = (appointment_id) => {
+      fetch('/api/realdata/delete', {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({id: appointment_id})
     })
     .then((res) => {
-      let appointments = [...this.state.appointments]
-      appointments = appointments.filter(appointment => appointment._id !== appointment_id)
-      this.setState({ appointments: appointments, response: res.status })
+      const appointments = this.state.appointments.filter(appointment => appointment._id !== appointment_id)
+      this.setState({ appointments, response: res.status })
       console.log(this.state.response)
     })
+  }
 
+  updateAppointment = (id, client, date, duration) => {
+      fetch ('/api/realdata/update', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({id, client, date, duration})
+    })
+    .then((res) => {
+      // const appointments = this.state.appointments.filter(appointment => appointment._id !== id)
+      this.setState({response: res.status})
+    })
   }
 
   render() {
@@ -58,8 +68,14 @@ class App extends Component {
 
     return (
       <div className="App">
-        {appointments.length > 0 ? <List response={appointments} deleteAppointment={this.deleteAppointment}/> : <h1 className='title'>{message}</h1>}
+        {appointments.length > 0 ? 
+        <List 
+        response={appointments} 
+        deleteAppointment={this.deleteAppointment} 
+        update={this.updateAppointment}/> 
+        : <h1 className='title'>{message}</h1>}
         <Link className='button is-primary' to='/form'>Create new Appointment</Link>
+        <Link className='button is-info' to='/update'>Test</Link>
       </div>
     );
   

@@ -5,7 +5,8 @@ const moment = require('moment')
 module.exports = {
   getAppointments: getAppointments,
   newAppointment: newAppointment,
-  deleteAppointment: deleteAppointment
+  deleteAppointment: deleteAppointment,
+  editAppointment: editAppointment
 }
 
 function getAppointments(req, res) {
@@ -20,7 +21,7 @@ function getAppointments(req, res) {
 
 function newAppointment(req, res) {
   
-  let tempDate = moment()
+  const tempDate = moment()
 
   const appointment = new Appointment({
     client: req.body.client,
@@ -43,4 +44,19 @@ function deleteAppointment(req, res) {
       throw err
   })
   res.redirect('/')
+}
+
+function editAppointment(req, res) {
+  const tempDate = moment()
+  Appointment.findOne({_id: req.body.id}, (err, appoint) => {
+    appoint.client = req.body.client
+    appoint.date = req.body.date
+    appoint.duration = req.body.duration
+    appoint.booked_on = tempDate
+
+    appoint.save((err) => {
+      if (err)
+        throw err
+    })
+  })
 }

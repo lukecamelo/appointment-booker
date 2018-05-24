@@ -10,4 +10,7 @@ router.route('/realdata')
 router.route('/realdata/delete')
   .post(appointmentController.deleteAppointment)
 
+router.route('/realdata/update')
+  .post(appointmentController.editAppointment)
+
 module.exports = router
