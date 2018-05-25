@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { deleteAppointment } from '../helpers/helpers'
 
 class Appointment extends Component {
 
   render() {
 
     const { _id, client, date, duration, booked_on } = this.props.appointment
-    const { deleteAppointment, index } = this.props
+    const { index } = this.props
 
 
     return (

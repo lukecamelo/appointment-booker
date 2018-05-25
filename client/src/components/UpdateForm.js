@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { updateAppointment } from '../helpers/helpers'
 
 class UpdateForm extends Component {
 
@@ -39,18 +40,6 @@ class UpdateForm extends Component {
     console.log(this.state.date)
   }
 
-  updateAppointment = (id, client, date, duration) => {
-    fetch ('/api/realdata/update', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({id, client, date, duration})
-  })
-  .then((res) => {
-    this.setState({response: res.status})
-    console.log(this.state.response)
-  })
-}
-
   render() {
 
     let { id, client, date, duration } = this.state
@@ -73,7 +62,7 @@ class UpdateForm extends Component {
 
         <input type="date" value={date} onChange={this.dateChangeHandler}/>
 
-        <button className='button is-primary' onClick={() => this.updateAppointment(id, client, date, duration)}>Edit</button>
+        <button className='button is-primary' onClick={() => updateAppointment(id, client, date, duration)}>Edit</button>
 
         <Link to='/' className='button is-info'>Home</Link>
       </div>
