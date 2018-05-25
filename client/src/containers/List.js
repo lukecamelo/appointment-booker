@@ -39,8 +39,7 @@ class List extends React.Component {
       })
 
       parsedTimes = times.map((time) => {
-        time.split(':')
-        return time[0]
+        return time.split(/[\s:]+/)
       })
 
       console.log(parsedTimes)
