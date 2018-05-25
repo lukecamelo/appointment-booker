@@ -50,11 +50,13 @@ class App extends Component {
     return (
       <div className="App">
         {appointments.length > 0 ? 
+
         <List 
         response={appointments} 
-        deleteAppointment={this.deleteAppointment} 
-        update={this.updateAppointment}/> 
+        deleteAppointment={this.deleteAppointment} /> 
+
         : <h1 className='title'>{message}</h1>}
+
         <Link className='button is-info' to='/form'>Create new Appointment</Link>
       </div>
     );

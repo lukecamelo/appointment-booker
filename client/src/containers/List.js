@@ -18,10 +18,12 @@ class List extends React.Component {
     let { sortBy } = this.state
     const { deleteAppointment, response, update } = this.props
     let appointments
+    let times
+    let parsedTimes
 
     if (response.length) {
 
-      appointments = this.props.response.map((obj, i) => {
+      appointments = response.map((obj, i) => {
         return (
           <Appointment
           key={i}
@@ -31,6 +33,17 @@ class List extends React.Component {
           update={update} />
         )
       })
+
+      times = response.map((obj, i) => {
+        return obj.booked_on
+      })
+
+      parsedTimes = times.map((time) => {
+        time.split(':')
+        return time[0]
+      })
+
+      console.log(parsedTimes)
 
       if(sortBy === 'date') {
 
@@ -82,7 +95,7 @@ class List extends React.Component {
             <option value="duration">Duration</option>
           </select>
         </div>
-
+      
       </div>
     )
   }

@@ -15,13 +15,13 @@ function getAppointments(req, res) {
       return res.json({'success': false, 'message': 'there was an error.'})
     }
 
-    return res.json({'success': true, 'message': 'Appointments fetched successfully.', appoint})
+    return res.json({'success': true, 'message': 'Nuffin\' here cap.', appoint})
   })
 }
 
 function newAppointment(req, res) {
   
-  const tempDate = moment()
+  const tempDate = moment().format('h:mm a')
 
   const appointment = new Appointment({
     client: req.body.client,
@@ -59,5 +59,5 @@ function editAppointment(req, res) {
         throw err
     })
   })
-  res.redirect('/')
+  res.redirect('/api')
 }
