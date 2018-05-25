@@ -74,8 +74,7 @@ class App extends Component {
         deleteAppointment={this.deleteAppointment} 
         update={this.updateAppointment}/> 
         : <h1 className='title'>{message}</h1>}
-        <Link className='button is-primary' to='/form'>Create new Appointment</Link>
-        <Link className='button is-info' to='/update'>Test</Link>
+        <Link className='button is-info' to='/form'>Create new Appointment</Link>
       </div>
     );
   

@@ -59,4 +59,5 @@ function editAppointment(req, res) {
         throw err
     })
   })
+  res.redirect('/')
 }

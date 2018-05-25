@@ -25,7 +25,7 @@ class List extends React.Component {
         return (
           <Appointment
           key={i}
-          id={i}
+          index={i}
           appointment={obj}
           deleteAppointment={deleteAppointment}
           update={update} />
