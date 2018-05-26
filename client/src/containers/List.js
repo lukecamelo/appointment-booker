@@ -42,7 +42,19 @@ class List extends React.Component {
         return time.split(/[\s:]+/)
       })
 
-      console.log(parsedTimes)
+      function timeCheck(times){
+        let hours = []
+        let minutes = []
+        let amPm = []
+        for(let i = 0; i < times.length; i++) {
+          hours.push(times[i][0])
+          minutes.push(times[i][1]) 
+          amPm.push(times[i][2])
+        }
+        return [hours, minutes, amPm]
+      }
+
+      console.log(timeCheck(parsedTimes))
 
       if(sortBy === 'date') {
 

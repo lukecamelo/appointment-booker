@@ -27,7 +27,7 @@ function newAppointment(req, res) {
     client: req.body.client,
     date: req.body.date,
     duration: req.body.duration,
-    booked_on: tempDate
+    booked_on: req.body.booked_on
   })
 
   appointment.save((err) => {

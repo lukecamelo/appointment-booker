@@ -8,8 +8,9 @@ class AppointmentForm extends Component {
 
   state = {
     client: '',
-    duration: 0,
+    duration: 30,
     date: '',
+    booked_on: '',
     response: 0
   }
 
@@ -37,9 +38,17 @@ class AppointmentForm extends Component {
     console.log(this.state.date)
   }
 
+  bookedChangeHandler = (e) => {
+    let booked_on = {...this.state.booked_on}
+    booked_on = e.target.value
+
+    this.setState({ booked_on })
+    console.log(booked_on)
+  }
+
   render() {
 
-    let { client, date, duration } = this.state
+    let { client, date, duration, booked_on } = this.state
 
     return (
       <div className="AppointmentForm container">
@@ -71,7 +80,14 @@ class AppointmentForm extends Component {
           </div>
         </div>
 
-        <button className='button is-info' onClick={() => addAppointment(client, date, duration)}>Add Appointment</button>
+        <div className="field">
+          <label className="label is-one-quarter column">Start Time</label>
+          <div className="control is-one-quarter column">
+            <input type="time" value={booked_on} onChange={this.bookedChangeHandler}/>
+          </div>
+        </div>
+
+        <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, duration, booked_on)}>Add Appointment</Link>
 
         <Link className='button is-primary' to='/'>Back</Link>
       </div>

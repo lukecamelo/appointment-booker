@@ -35,13 +35,14 @@ export const updateAppointment = (id, client, date, duration) => {
   })
 }
 
-export const addAppointment = (client, date, duration) => {
+export const addAppointment = (client, date, duration, booked_on) => {
   fetch('/api/realdata', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ client, date, duration })
+    body: JSON.stringify({ client, date, duration, booked_on })
   })
   .then((res) => {
-    return res
+    this.setState({response: res.status})
+    console.log(this.state.response)
   })
 }
