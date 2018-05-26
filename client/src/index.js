@@ -11,7 +11,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path='/' component={App} />
-      <Route exact path='/form' render={AppointmentForm} />
+      <Route exact path='/form' component={AppointmentForm} />
       <Route path='/appointments/:id' component={UpdateForm} />
     </Switch>
   </BrowserRouter>

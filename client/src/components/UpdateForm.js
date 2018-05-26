@@ -50,17 +50,22 @@ class UpdateForm extends Component {
         <input 
         type="text" 
         onChange={this.nameChangeHandler} 
-        value={this.state.client}/>
+        value={client}
+        required />
 
         <div className="select">
-          <select name='duration' value={duration} onChange={this.durationChangeHandler} required>
+          <select value={duration} onChange={this.durationChangeHandler} required>
             <option value="30">30 minutes</option>
             <option value="45">45 minutes</option>
             <option value="60">1 hour</option>
           </select>
         </div>
 
-        <input type="date" value={date} onChange={this.dateChangeHandler}/>
+        <input 
+        type="date" 
+        onChange={this.dateChangeHandler}
+        value={date}
+        required />
 
         <button className='button is-primary' onClick={() => updateAppointment(id, client, date, duration)}>Edit</button>
 

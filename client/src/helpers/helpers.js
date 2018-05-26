@@ -36,9 +36,12 @@ export const updateAppointment = (id, client, date, duration) => {
 }
 
 export const addAppointment = (client, date, duration) => {
-  fetch('/api/realdata/add', {
+  fetch('/api/realdata', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({ client, date, duration })
+  })
+  .then((res) => {
+    return res
   })
 }
