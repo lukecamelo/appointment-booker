@@ -33,23 +33,25 @@ class AppointmentForm extends Component {
   }
 
   isConflicting = () => {
-
-    let startTimes = [], endTimes =[], dates = [], start = [], end = []
-    const { success, appointments } = this.state
+    const { success, appointments, date, startTime, endTime } = this.state
 
     if (success === true) {
+      
+      let start = new Date(date + ', ' + startTime + ':00')
+      let end = new Date(date + ', ' + endTime + ':00')
 
-      for(let i = 0; i < appointments.length; i++) {
-        dates.push(appointments[i].date)
-        startTimes.push(appointments[i].startTime)
-        endTimes.push(appointments[i].endTime)
-        start.push(new Date(dates[i] + ', ' + startTimes[i]))
-        end.push(new Date(dates[i] + ', ' + endTimes[i]))
+      for (let i = 0; i < appointments.length; i++) {
+
+        const dbStart = new Date(appointments[i].startTime)
+        const dbEnd = new Date(appointments[i].endTime)
+
+        if (start >= dbStart && start <= dbEnd || end >= dbStart && end <= dbEnd) {
+          console.log('conflict')
+        } else {
+          console.log('we good')
+        }
       }
-      console.log(start, end)
 
-    } else {
-      console.log('hol up')
     }
   }
 
