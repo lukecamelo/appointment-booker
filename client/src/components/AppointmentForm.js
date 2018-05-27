@@ -14,38 +14,6 @@ class AppointmentForm extends Component {
     response: 0
   }
 
-  // nameChangeHandler = (e) => {
-  //   let client = {...this.state.client}
-  //   client = e.target.value
-
-  //   this.setState({client})
-  //   console.log(this.state.client)
-  // }
-
-  // durationChangeHandler = (e) => {
-  //   let duration = {...this.state.duration}
-  //   duration = e.target.value
-
-  //   this.setState({duration})
-  //   console.log(this.state.duration)
-  // }
-
-  // dateChangeHandler = (e) => {
-  //   let date = {...this.state.date}
-  //   date = e.target.value
-
-  //   this.setState({date})
-  //   console.log(this.state.date)
-  // }
-
-  // bookedChangeHandler = (e) => {
-  //   let booked_on = {...this.state.booked_on}
-  //   booked_on = e.target.value
-
-  //   this.setState({ booked_on })
-  //   console.log(booked_on)
-  // }
-
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -64,7 +32,7 @@ class AppointmentForm extends Component {
           </div>
         </div>
 
-        <div className="field">
+        {/* <div className="field">
           <label className="label is-one-quarter column">Duration</label>
           <div className="control is-one-quarter column">
             <div className="select">
@@ -75,7 +43,7 @@ class AppointmentForm extends Component {
               </select>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="field">
           <label className="label is-one-quarter column">Date</label>
@@ -88,7 +56,7 @@ class AppointmentForm extends Component {
           <label className="label is-one-quarter column">Start Time</label>
           <div className="control is-one-quarter column">
             <input type="time" value={booked_on} name='booked_on' onChange={this.changeHandler}/>
-            <input type="time" value={duration} onChange={this.changeHandler}/>
+            <input type="time" value={duration} name='duration' onChange={this.changeHandler}/>
           </div>
         </div>
 

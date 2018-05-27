@@ -90,8 +90,8 @@ class List extends React.Component {
               <th>ID</th>
               <th>Client</th>
               <th>Date booked</th>
-              <th>Duration booked</th>
-              <th>Booked on</th>
+              <th>Start time</th>
+              <th>End time</th>
             </tr>
           </thead>
           <tbody>

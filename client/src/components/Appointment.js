@@ -15,8 +15,8 @@ class Appointment extends Component {
         <th>{index}</th>
         <td>{client}</td>
         <td>{date}</td>
-        <td>{duration} minutes</td>
         <td>{booked_on}</td>
+        <td>{duration}</td>
         <td><a className='button is-danger' onClick={() => deleteAppointment(_id)}>Delete</a></td>
         <td><Link className='button is-primary' to={`/appointments/${_id}`}>Edit</Link></td>
       </tr>
