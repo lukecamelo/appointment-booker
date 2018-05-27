@@ -6,7 +6,7 @@ class Appointment extends Component {
 
   render() {
 
-    const { _id, client, date, duration, booked_on } = this.props.appointment
+    const { _id, client, date, endTime, startTime } = this.props.appointment
     const { index, deleteAppointment } = this.props
 
 
@@ -15,8 +15,8 @@ class Appointment extends Component {
         <th>{index}</th>
         <td>{client}</td>
         <td>{date}</td>
-        <td>{booked_on}</td>
-        <td>{duration}</td>
+        <td>{startTime}</td>
+        <td>{endTime}</td>
         <td><a className='button is-danger' onClick={() => deleteAppointment(_id)}>Delete</a></td>
         <td><Link className='button is-primary' to={`/appointments/${_id}`}>Edit</Link></td>
       </tr>

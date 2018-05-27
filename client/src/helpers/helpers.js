@@ -23,11 +23,11 @@ export const deleteAppointment = (appointment_id) => {
   })
 }
 
-export const updateAppointment = (id, client, date, duration) => {
+export const updateAppointment = (id, client, date, endTime) => {
     fetch ('/api/realdata/update', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, client, date, duration })
+    body: JSON.stringify({ id, client, date, endTime })
   })
   .then((res) => {
     // const appointments = this.state.appointments.filter(appointment => appointment._id !== id)
@@ -35,11 +35,11 @@ export const updateAppointment = (id, client, date, duration) => {
   })
 }
 
-export const addAppointment = (client, date, duration, booked_on) => {
+export const addAppointment = (client, date, endTime, startTime) => {
   fetch('/api/realdata', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ client, date, duration, booked_on })
+    body: JSON.stringify({ client, date, endTime, startTime })
   })
   .then((res) => {
     this.setState({response: res.status})

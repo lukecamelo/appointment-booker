@@ -18,8 +18,8 @@ class List extends React.Component {
     let { sortBy } = this.state
     const { deleteAppointment, response, update } = this.props
     let appointments
-    let times
-    let parsedTimes
+    // let times
+    // let parsedTimes
 
     if (response.length) {
 
@@ -34,27 +34,27 @@ class List extends React.Component {
         )
       })
 
-      times = response.map((obj, i) => {
-        return obj.booked_on
-      })
+      // times = response.map((obj, i) => {
+      //   return obj.startTime
+      // })
 
-      parsedTimes = times.map((time) => {
-        return time.split(/[:]+/)
-      })
+      // parsedTimes = times.map((time) => {
+      //   return time.split(/[:]+/)
+      // })
 
-      // TODO get the dang time comparison working, at least a little bit
-      function timeCheck(times){
-        const h = []
-        const mm = []
+      // // TODO get the dang time comparison working, at least a little bit
+      // function timeCheck(times){
+      //   const h = []
+      //   const mm = []
 
-        for (let i = 0; i < times.length; i++) {
-          h.push(times[i][0])
-          mm.push(times[i][1])
-        }
+      //   for (let i = 0; i < times.length; i++) {
+      //     h.push(times[i][0])
+      //     mm.push(times[i][1])
+      //   }
 
-      }
+      // }
 
-      console.log(timeCheck(parsedTimes))
+      // console.log(timeCheck(parsedTimes))
 
       if(sortBy === 'date') {
 
@@ -72,10 +72,10 @@ class List extends React.Component {
           return a.props.ID - b.props.ID
         })
 
-      } else if (sortBy === 'duration') {
+      } else if (sortBy === 'endTime') {
 
         appointments.sort((a, b) => {
-          return a.props.appointment.duration - b.props.appointment.duration
+          return a.props.appointment.endTime
         })
         
       }
@@ -89,7 +89,7 @@ class List extends React.Component {
             <tr>
               <th>ID</th>
               <th>Client</th>
-              <th>Date booked</th>
+              <th>Date</th>
               <th>Start time</th>
               <th>End time</th>
             </tr>
@@ -103,7 +103,7 @@ class List extends React.Component {
           <select onChange={this.handleSelect}>
             <option value="id">ID</option>
             <option value="date">Date</option>
-            <option value="duration">Duration</option>
+            <option value="endTime">end time</option>
           </select>
         </div>
       

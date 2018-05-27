@@ -8,7 +8,7 @@ class UpdateForm extends Component {
     id: this.props.match.params.id,
     client: 'Edit name here',
     date: 'new date',
-    duration: 30,
+    endTime: 30,
     response: ''
   }
 
@@ -24,12 +24,12 @@ class UpdateForm extends Component {
     console.log(this.state.client)
   }
 
-  durationChangeHandler = (e) => {
-    let duration = {...this.state.duration}
-    duration = e.target.value
+  endTimeChangeHandler = (e) => {
+    let endTime = {...this.state.endTime}
+    endTime = e.target.value
 
-    this.setState({duration})
-    console.log(this.state.duration)
+    this.setState({endTime})
+    console.log(this.state.endTime)
   }
 
   dateChangeHandler = (e) => {
@@ -42,7 +42,7 @@ class UpdateForm extends Component {
 
   render() {
 
-    let { id, client, date, duration } = this.state
+    let { id, client, date, endTime } = this.state
     
     return (
       <div className='UpdateForm container'>
@@ -54,7 +54,7 @@ class UpdateForm extends Component {
         required />
 
         <div className="select">
-          <select value={duration} onChange={this.durationChangeHandler} required>
+          <select value={endTime} onChange={this.endTimeChangeHandler} required>
             <option value="30">30 minutes</option>
             <option value="45">45 minutes</option>
             <option value="60">1 hour</option>
@@ -67,7 +67,7 @@ class UpdateForm extends Component {
         value={date}
         required />
 
-        <button className='button is-primary' onClick={() => updateAppointment(id, client, date, duration)}>Edit</button>
+        <button className='button is-primary' onClick={() => updateAppointment(id, client, date, endTime)}>Edit</button>
 
         <Link to='/' className='button is-info'>Home</Link>
       </div>

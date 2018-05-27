@@ -27,8 +27,8 @@ function newAppointment(req, res) {
   const appointment = new Appointment({
     client: req.body.client,
     date: req.body.date,
-    duration: req.body.duration,
-    booked_on: req.body.booked_on
+    startTime: req.body.startTime,
+    endTime: req.body.endTime
   })
 
   appointment.save((err) => {
@@ -52,8 +52,8 @@ function editAppointment(req, res) {
   Appointment.findOne({_id: req.body.id}, (err, appoint) => {
     appoint.client = req.body.client
     appoint.date = req.body.date
-    appoint.duration = req.body.duration
-    appoint.booked_on = tempDate
+    appoint.startTime = req.body.startTime
+    appoint.endTime = req.body.endTime
 
     appoint.save((err) => {
       if (err)

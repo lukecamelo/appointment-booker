@@ -10,9 +10,9 @@ class AppointmentForm extends Component {
   state = {
     appointments: [],
     client: '',
-    duration: 30,
     date: {},
-    booked_on: '',
+    startTime: '',
+    endTime: '',
     response: 0
   }
 
@@ -32,13 +32,13 @@ class AppointmentForm extends Component {
   }
 
   isConflicting = () => {
-    let time = new Date(this.state.date + ', ' + this.state.booked_on + ':00')
-    console.log(time > new Date('5/25/2019'))
+    let startTime = new Date(this.state.date + ', ' + this.state.startTime + ':00')
+    let endTime = new Date(this.state.date + ', ' + this.state.endTime + ':00')
   }
 
   render() {
 
-    let { client, date, duration, booked_on } = this.state
+    let { client, date, endTime, startTime } = this.state
 
     return (
       <div className="AppointmentForm container">
@@ -60,12 +60,12 @@ class AppointmentForm extends Component {
         <div className="field">
           <label className="label is-one-quarter column">Start Time</label>
           <div className="control is-one-quarter column">
-            <input type="time" value={booked_on} name='booked_on' onChange={this.changeHandler}/>
-            <input type="time" value={duration} name='duration' onChange={this.changeHandler}/>
+            <input type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
+            <input type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
           </div>
         </div>
 
-        <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, duration, booked_on)}>Add Appointment</Link>
+        <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
         <button className="button is-primary" onClick={this.isConflicting}>Test</button>
 
         <Link className='button is-primary' to='/'>Back</Link>
