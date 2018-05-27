@@ -21,8 +21,8 @@ function getAppointments(req, res) {
 
 function newAppointment(req, res) {
   
-  const tempDate = moment().format('h:mm a')
-  const formattedDate = moment(req.body.client, 'MM-DD-YYYY')
+  const tempDate = moment().format('HH:mm a')
+  const formattedDate = moment(req.body.client, 'yyyy-MM-dd')
 
   const appointment = new Appointment({
     client: req.body.client,

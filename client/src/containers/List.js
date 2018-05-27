@@ -39,19 +39,19 @@ class List extends React.Component {
       })
 
       parsedTimes = times.map((time) => {
-        return time.split(/[\s:]+/)
+        return time.split(/[:]+/)
       })
 
+      // TODO get the dang time comparison working, at least a little bit
       function timeCheck(times){
-        let hours = []
-        let minutes = []
-        let amPm = []
-        for(let i = 0; i < times.length; i++) {
-          hours.push(times[i][0])
-          minutes.push(times[i][1]) 
-          amPm.push(times[i][2])
+        const h = []
+        const mm = []
+
+        for (let i = 0; i < times.length; i++) {
+          h.push(times[i][0])
+          mm.push(times[i][1])
         }
-        return [hours, minutes, amPm]
+
       }
 
       console.log(timeCheck(parsedTimes))

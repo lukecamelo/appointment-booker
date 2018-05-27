@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+// import moment from 'moment';
 import { Link } from 'react-router-dom'
-import { addAppointment } from '../helpers/helpers'
+import { addAppointment, callApi } from '../helpers/helpers'
 
 import './AppointmentForm.css'
 
 class AppointmentForm extends Component {
 
   state = {
+    appointments: [],
     client: '',
     duration: 30,
     date: {},
@@ -14,8 +16,24 @@ class AppointmentForm extends Component {
     response: 0
   }
 
+  componentDidMount() {
+    callApi()
+      .then((res) => {
+        this.setState({
+          appointments: res.appoint
+        })
+      })
+      .catch(err => console.log(err))
+    console.log(this.state.appointments)
+  }
+
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  isConflicting = () => {
+    let time = new Date(this.state.date + ', ' + this.state.booked_on + ':00')
+    console.log(time > new Date('5/25/2019'))
   }
 
   render() {
@@ -31,19 +49,6 @@ class AppointmentForm extends Component {
             <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
           </div>
         </div>
-
-        {/* <div className="field">
-          <label className="label is-one-quarter column">Duration</label>
-          <div className="control is-one-quarter column">
-            <div className="select">
-              <select value={duration} name='duration' onChange={this.changeHandler} required>
-                <option value="30">30 minutes</option>
-                <option value="45">45 minutes</option>
-                <option value="60">1 hour</option>
-              </select>
-            </div>
-          </div>
-        </div> */}
 
         <div className="field">
           <label className="label is-one-quarter column">Date</label>
@@ -61,6 +66,7 @@ class AppointmentForm extends Component {
         </div>
 
         <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, duration, booked_on)}>Add Appointment</Link>
+        <button className="button is-primary" onClick={this.isConflicting}>Test</button>
 
         <Link className='button is-primary' to='/'>Back</Link>
       </div>
