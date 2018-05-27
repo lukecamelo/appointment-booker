@@ -36,13 +36,11 @@ export const updateAppointment = (id, client, date, endTime) => {
 }
 
 export const addAppointment = (client, date, endTime, startTime) => {
+  const parsedStart = new Date(date + ', ' + startTime + ':00')
+  const parsedEnd = new Date(date + ', ' + endTime + ':00')
   fetch('/api/realdata', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ client, date, endTime, startTime })
-  })
-  .then((res) => {
-    this.setState({response: res.status})
-    console.log(this.state.response)
+    body: JSON.stringify({ client, date, startTime: parsedStart, endTime: parsedEnd })
   })
 }

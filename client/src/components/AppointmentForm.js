@@ -8,6 +8,8 @@ import './AppointmentForm.css'
 class AppointmentForm extends Component {
 
   state = {
+    success: false,
+    message: '',
     appointments: [],
     client: '',
     date: {},
@@ -18,13 +20,12 @@ class AppointmentForm extends Component {
 
   componentDidMount() {
     callApi()
-      .then((res) => {
-        this.setState({
-          appointments: res.appoint
-        })
-      })
+      .then(res => this.setState({
+        success: res.success,
+        message: res.message,
+        appointments: res.appoint
+      }))
       .catch(err => console.log(err))
-    console.log(this.state.appointments)
   }
 
   changeHandler = (e) => {
@@ -32,13 +33,33 @@ class AppointmentForm extends Component {
   }
 
   isConflicting = () => {
-    let startTime = new Date(this.state.date + ', ' + this.state.startTime + ':00')
-    let endTime = new Date(this.state.date + ', ' + this.state.endTime + ':00')
+
+    let startTimes = [], endTimes =[], dates = [], start = [], end = []
+    const { success, appointments } = this.state
+
+    if (success === true) {
+
+      for(let i = 0; i < appointments.length; i++) {
+        dates.push(appointments[i].date)
+        startTimes.push(appointments[i].startTime)
+        endTimes.push(appointments[i].endTime)
+        start.push(new Date(dates[i] + ', ' + startTimes[i]))
+        end.push(new Date(dates[i] + ', ' + endTimes[i]))
+      }
+      console.log(start, end)
+
+    } else {
+      console.log('hol up')
+    }
   }
 
   render() {
 
-    let { client, date, endTime, startTime } = this.state
+    const { client, date, endTime, startTime, success, message, appointments } = this.state
+
+    if(success === true) {
+      console.log(success, message, appointments)
+    }
 
     return (
       <div className="AppointmentForm container">
