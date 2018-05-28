@@ -4,22 +4,11 @@ import Appointment from '../components/Appointment'
 import './List.css'
 
 class List extends React.Component {
-  state = {
-    sortBy: 'id'
-  }
-
-  handleSelect = (e) => {
-    this.setState({sortBy: e.target.value})
-    console.log(this.state.sortBy)
-  }
 
   render() {
 
-    let { sortBy } = this.state
     const { deleteAppointment, response, update } = this.props
     let appointments
-    // let times
-    // let parsedTimes
 
     if (response.length) {
 
@@ -33,52 +22,6 @@ class List extends React.Component {
           update={update} />
         )
       })
-
-      // times = response.map((obj, i) => {
-      //   return obj.startTime
-      // })
-
-      // parsedTimes = times.map((time) => {
-      //   return time.split(/[:]+/)
-      // })
-
-      // // TODO get the dang time comparison working, at least a little bit
-      // function timeCheck(times){
-      //   const h = []
-      //   const mm = []
-
-      //   for (let i = 0; i < times.length; i++) {
-      //     h.push(times[i][0])
-      //     mm.push(times[i][1])
-      //   }
-
-      // }
-
-      // console.log(timeCheck(parsedTimes))
-
-      if(sortBy === 'date') {
-
-        // Doesn't work properly.
-        
-        // appointments.sort((a, b) => {
-        //   let partsA = a.props.appointment.date.split("-")
-        //   let partsB = b.props.appointment.date.split("-")
-        //   return new Date(partsA[2], partsA[1] - 1, partsA[0]) - new Date(partsB[2], partsB[1] - 1, partsB[0])
-        // })
-
-      } else if (sortBy === 'id') {
-
-        appointments.sort((a, b) => {
-          return a.props.ID - b.props.ID
-        })
-
-      } else if (sortBy === 'endTime') {
-
-        appointments.sort((a, b) => {
-          return a.props.appointment.endTime
-        })
-        
-      }
     
     } 
 
@@ -98,14 +41,6 @@ class List extends React.Component {
             {this.props.response.length ? appointments : null}
           </tbody>
         </table>
-
-        <div className="select">
-          <select onChange={this.handleSelect}>
-            <option value="id">ID</option>
-            <option value="date">Date</option>
-            <option value="endTime">end time</option>
-          </select>
-        </div>
       
       </div>
     )
