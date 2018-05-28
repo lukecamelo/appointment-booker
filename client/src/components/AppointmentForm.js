@@ -39,7 +39,6 @@ class AppointmentForm extends Component {
       
       let start = new Date(date + ', ' + startTime + ':00')
       let end = new Date(date + ', ' + endTime + ':00')
-      let conflict = false
       let increment = 0
 
       for (let i = 0; i < appointments.length; i++) {
@@ -47,13 +46,11 @@ class AppointmentForm extends Component {
         const dbStart = new Date(appointments[i].startTime)
         const dbEnd = new Date(appointments[i].endTime)
 
-        if (start >= dbStart && start <= dbEnd || end >= dbStart && end <= dbEnd) {
+        if ((start >= dbStart && start <= dbEnd) || (end >= dbStart && end <= dbEnd)) {
           console.log('conflict')
-          conflict = true
           increment++
         } else {
           console.log('we good')
-          conflict = false
         }
       }
 

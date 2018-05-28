@@ -23,11 +23,13 @@ export const deleteAppointment = (appointment_id) => {
   })
 }
 
-export const updateAppointment = (id, client, date, endTime) => {
+export const updateAppointment = (id, client, date, startTime, endTime) => {
+    const parsedStart = new Date(date + ', ' + startTime + ':00')
+    const parsedEnd = new Date(date + ', ' + endTime + ':00')
     fetch ('/api/realdata/update', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, client, date, endTime })
+    body: JSON.stringify({ id, client, date, startTime: parsedStart, endTime: parsedEnd })
   })
   .then((res) => {
     // const appointments = this.state.appointments.filter(appointment => appointment._id !== id)
