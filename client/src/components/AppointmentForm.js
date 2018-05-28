@@ -39,6 +39,8 @@ class AppointmentForm extends Component {
       
       let start = new Date(date + ', ' + startTime + ':00')
       let end = new Date(date + ', ' + endTime + ':00')
+      let conflict = false
+      let increment = 0
 
       for (let i = 0; i < appointments.length; i++) {
 
@@ -47,9 +49,18 @@ class AppointmentForm extends Component {
 
         if (start >= dbStart && start <= dbEnd || end >= dbStart && end <= dbEnd) {
           console.log('conflict')
+          conflict = true
+          increment++
         } else {
           console.log('we good')
+          conflict = false
         }
+      }
+
+      if (increment > 0) {
+        return true
+      } else {
+        return false
       }
 
     }
@@ -61,6 +72,7 @@ class AppointmentForm extends Component {
 
     if(success === true) {
       console.log(success, message, appointments)
+      console.log(this.isConflicting())
     }
 
     return (
@@ -88,7 +100,9 @@ class AppointmentForm extends Component {
           </div>
         </div>
 
+        {!this.isConflicting() ?
         <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
+        : <h1>Conflicting dates.</h1>}
         <button className="button is-primary" onClick={this.isConflicting}>Test</button>
 
         <Link className='button is-primary' to='/'>Back</Link>
