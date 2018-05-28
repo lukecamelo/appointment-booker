@@ -58,6 +58,7 @@ class App extends Component {
         : <h1 className='title'>{message}</h1>}
 
         <Link className='button is-info' to='/form'>Create new Appointment</Link>
+        <Link className='button is-info' to='/login'>Login page</Link>
       </div>
     );
   
