@@ -9,9 +9,10 @@ class Appointment extends Component {
     const { _id, client, date, endTime, startTime } = this.props.appointment
     const { index, deleteAppointment } = this.props
     
-    const parsedStart = startTime.split(' ')[4]
-    const parsedEnd = endTime.split(' ')[4]
-    
+    // take time from date object and make it pretty
+    const parsedStart = startTime.split(' ')[4].slice(0, 5)
+    const parsedEnd = endTime.split(' ')[4].slice(0, 5)
+
     return (
       <tr className='Appointment'>
         <th>{index}</th>
