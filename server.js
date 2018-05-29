@@ -21,6 +21,7 @@ passport.use(new Strategy(
         return cb(null, false)
       }
       if (user.password != password) { return cb(null, false) }
+      console.log('success?')
       return cb(null, user)
     })
   }
