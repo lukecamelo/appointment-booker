@@ -17,7 +17,7 @@ passport.use(new Strategy(
     User.findOne({ username: username }, (err, user) => {
       if (err) { return cb(err) }
       if (!user) { 
-        console.log('working but not really')
+        console.log('Invalid user/pass')
         return cb(null, false)
       }
       if (user.password != password) { return cb(null, false) }
@@ -51,9 +51,15 @@ app.use(passport.session());
 mongoose.connect('mongodb://lukecamelo:password@ds117509.mlab.com:17509/appointment_db')
 db.on('error', console.error.bind(console, 'connection error:'))
 
+app.get('/login', (req, res) => {
+  return res.json({user: req.user})
+  res.redirect('/')
+})
+
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
+    // console.log(req.session)
     res.redirect('/')
 })
 
