@@ -29,7 +29,9 @@ class App extends Component {
 
     this.checkLogin()
       .then(res => {
-        this.setState({user: res.user.username})
+        if(res.user.username) {
+          this.setState({ user: res.user.username, isLoggedIn: true })
+        }
       })
   }
 
@@ -44,6 +46,7 @@ class App extends Component {
       method: 'GET',
       credentials: 'same-origin'
     })
+    this.setState({ user: 'nobody logged in', isLoggedIn: false })
   }
 
   deleteAppointment = (appointment_id) => {
@@ -61,16 +64,16 @@ class App extends Component {
 
   render() {
 
-    const { success, message, appointments, user } = this.state
+    const { success, message, appointments, user, isLoggedIn } = this.state
 
     if (success === true) {
       console.log(success, message, appointments)
     }
 
-    if (user) {
+    if (isLoggedIn) {
       return (
         <div className="App">
-          <h1 className="title">{this.state.user}</h1>
+          <h1 className="title">{user}</h1>
           {appointments.length > 0 ? 
 
           <List 
@@ -80,7 +83,7 @@ class App extends Component {
           : <h1 className='title'>{message}</h1>}
 
           <Link className='button is-info' to='/form'>Create new Appointment</Link>
-          <button className='button is-danger' onClick={this.logout}>Logout</button>
+          <Link className='button is-danger' to='/' onClick={this.logout}>Logout</Link>
         </div>
       )
     } else {
