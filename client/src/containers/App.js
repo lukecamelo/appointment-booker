@@ -11,7 +11,7 @@ import List from './List'
 class App extends Component {
   state = {
     isLoggedIn: false,
-    otherRes: '',
+    user: '',
     success: false,
     message: 'nothing',
     appointments: [],
@@ -29,14 +29,21 @@ class App extends Component {
 
     this.checkLogin()
       .then(res => {
-        console.log(res)
+        this.setState({user: res.user.username})
       })
   }
 
-  checkLogin = async() => {
+  checkLogin = async () => {
     const response = await fetch('/login', { credentials: 'same-origin' })   
     const body = response.json()
     return body
+  }
+
+  logout = () => {
+    fetch('/logout', {
+      method: 'GET',
+      credentials: 'same-origin'
+    })
   }
 
   deleteAppointment = (appointment_id) => {
@@ -54,28 +61,37 @@ class App extends Component {
 
   render() {
 
-    const { success, message, appointments } = this.state
+    const { success, message, appointments, user } = this.state
 
     if (success === true) {
       console.log(success, message, appointments)
     }
 
-    return (
+    if (user) {
+      return (
+        <div className="App">
+          <h1 className="title">{this.state.user}</h1>
+          {appointments.length > 0 ? 
+
+          <List 
+          response={appointments} 
+          deleteAppointment={this.deleteAppointment} /> 
+
+          : <h1 className='title'>{message}</h1>}
+
+          <Link className='button is-info' to='/form'>Create new Appointment</Link>
+          <button className='button is-danger' onClick={this.logout}>Logout</button>
+          <a href="/logout" className="button is-danger">Log out?</a>
+        </div>
+      )
+    } else {
+      return (
       <div className="App">
-        <h1 className="title">{this.state.otherRes}</h1>
-        {appointments.length > 0 ? 
-
-        <List 
-        response={appointments} 
-        deleteAppointment={this.deleteAppointment} /> 
-
-        : <h1 className='title'>{message}</h1>}
-
-        <Link className='button is-info' to='/form'>Create new Appointment</Link>
+        <h1 className="title">Please log in.</h1>
         <Link className='button is-info' to='/login'>Login page</Link>
-        <button className='button is-primary' onClick={() => console.log(this.state.otherRes)}>test</button>
       </div>
-    );
+      )
+    }
   
   }
 }

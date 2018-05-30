@@ -52,7 +52,12 @@ mongoose.connect('mongodb://lukecamelo:password@ds117509.mlab.com:17509/appointm
 db.on('error', console.error.bind(console, 'connection error:'))
 
 app.get('/login', (req, res) => {
-  return res.json({user: req.user})
+  if (req.user) {
+    return res.json({user: req.user})
+  }
+  else {
+    return res.json({user: 'nobody logged in.'})
+  }
   res.redirect('/')
 })
 
@@ -61,6 +66,13 @@ app.post('/login',
   function(req, res) {
     // console.log(req.session)
     res.redirect('/')
+})
+
+
+app.get('/logout', (req, res) => {
+  req.logOut()
+  req.user = null
+  res.redirect('/')
 })
 
 app.listen(port, () => console.log(`listening on port ${port}`))
