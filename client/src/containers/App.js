@@ -81,7 +81,6 @@ class App extends Component {
 
           <Link className='button is-info' to='/form'>Create new Appointment</Link>
           <button className='button is-danger' onClick={this.logout}>Logout</button>
-          <a href="/logout" className="button is-danger">Log out?</a>
         </div>
       )
     } else {

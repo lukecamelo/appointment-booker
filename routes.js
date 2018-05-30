@@ -13,5 +13,4 @@ router.route('/realdata/delete')
 router.route('/realdata/update')
   .post(appointmentController.editAppointment)
 
-
 module.exports = router

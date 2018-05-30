@@ -48,7 +48,9 @@ app.use(require('express-session')({ secret: 'express secret', resave: false, sa
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://lukecamelo:password@ds117509.mlab.com:17509/appointment_db')
+mongoose.connect('mongodb://lukecamelo:password@ds117509.mlab.com:17509/appointment_db', {
+  reconnectInterval: 1000
+})
 db.on('error', console.error.bind(console, 'connection error:'))
 
 app.get('/login', (req, res) => {

@@ -3,21 +3,21 @@ import React from 'react'
 class Login extends React.Component {
   render() {
     return (
-      <div className="Login">
+      <div className="Login container">
         <form action="/login" method="POST">
 
-          <div>
-            <label>Username:</label>
-            <input type="text" name="username"/><br/>
+          <div className='field is-one-quarter column'>
+            <label className='label'>Username:</label>
+            <input className='input' type="text" name="username"/><br/>
           </div>
 
-          <div>
-            <label>Password:</label>
-            <input type="password" name="password"/>
+          <div className='field is-one-quarter column'>
+            <label className='label'>Password:</label>
+            <input className='input' type="password" name="password"/>
           </div>
 
-          <div>
-            <input type="submit" value="Submit"/>
+          <div className='field is-one-quarter column'>
+            <input className='button is-primary' type="submit" value="Submit"/>
           </div>
 
         </form>
