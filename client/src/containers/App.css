@@ -1,28 +1,20 @@
 .App {
+  box-sizing: border-box;
   text-align: center;
+  padding-top: 5rem;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.appointment-table {
+  clear: both;
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.login-doink {
+    padding-top: 5rem;
+    display: flex;
+    justify-content: center;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.login-card {
+  width: 30%;
 }

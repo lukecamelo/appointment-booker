@@ -57,8 +57,7 @@ class App extends Component {
     })
     .then((res) => {
       const appointments = this.state.appointments.filter(appointment => appointment._id !== appointment_id)
-      this.setState({ appointments, response: res.status })
-      console.log(this.state.response)
+      this.setState({ appointments, response: res.status }, console.log(this.state.response))
     })
   }
 
@@ -72,25 +71,33 @@ class App extends Component {
 
     if (isLoggedIn) {
       return (
-        <div className="App">
-          <h1 className="title">{user}</h1>
-          {appointments.length > 0 ? 
+        <div className="App container">
+          <div className="card appointment-table">
+            <div className="card-content">
+              <h1 className="title">{user}</h1>
+              {appointments.length > 0 ? 
 
-          <List 
-          response={appointments} 
-          deleteAppointment={this.deleteAppointment} /> 
+              <List 
+              response={appointments} 
+              deleteAppointment={this.deleteAppointment} /> 
 
-          : <h1 className='title'>{message}</h1>}
+              : <h1 className='title'>{message}</h1>}
 
-          <Link className='button is-info' to='/form'>Create new Appointment</Link>
-          <Link className='button is-danger' to='/' onClick={this.logout}>Logout</Link>
+              <Link className='button is-info' to='/form'>Create new Appointment</Link>
+              <Link className='button is-danger' to='/' onClick={this.logout}>Logout</Link>
+            </div>
+          </div>
         </div>
       )
     } else {
       return (
-      <div className="App">
-        <h1 className="title">Please log in.</h1>
-        <Link className='button is-info' to='/login'>Login page</Link>
+      <div className="App container login-doink">
+        <div className="card login-card">
+          <div className="card-content">
+            <h1 className="title">Please log in.</h1>
+            <Link className='button is-info' to='/login'>Login page</Link>
+          </div>
+        </div>
       </div>
       )
     }
