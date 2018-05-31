@@ -74,34 +74,39 @@ class AppointmentForm extends Component {
 
     return (
       <div className="AppointmentForm container">
+        <div className="card">
+          <div className="card-content">
 
-        <div className="field">
-          <label className="label is-one-quarter column">Client</label>
-          <div className="control is-one-quarter column">
-            <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+            <div className="field">
+              <label className="label">Client</label>
+              <div className="control">
+                <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Date</label>
+              <div className="control">
+                <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input date-input"/>
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Start Time</label>
+              <div className="control">
+                <input className='time-selector' type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
+                <input className='time-selector' type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
+              </div>
+            </div>
+
+            {!this.isConflicting() ?
+            <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
+            : <h1>Conflicting dates.</h1>}
+
+            <Link className='button is-primary' to='/'>Back</Link>
+
           </div>
         </div>
-
-        <div className="field">
-          <label className="label is-one-quarter column">Date</label>
-          <div className="control is-one-quarter column">
-            <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input date-input"/>
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label is-one-quarter column">Start Time</label>
-          <div className="control is-one-quarter column">
-            <input type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
-            <input type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
-          </div>
-        </div>
-
-        {!this.isConflicting() ?
-        <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
-        : <h1>Conflicting dates.</h1>}
-
-        <Link className='button is-primary' to='/'>Back</Link>
       </div>
     )
   }

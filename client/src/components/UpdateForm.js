@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { updateAppointment, callApi } from '../helpers/helpers'
 
+import './UpdateForm.css'
+
 class UpdateForm extends Component {
 
   state = {
@@ -67,34 +69,40 @@ class UpdateForm extends Component {
     
     return (
       <div className='UpdateForm container'>
-        <h2 className="title">{this.state.id}</h2>
-        <div className="field">
-          <label className="label is-one-quarter column">Client</label>
-          <div className="control is-one-quarter column">
-            <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+        <div className="card">
+          <div className="card-content">
+
+            <h2 className="title">{id}</h2>
+            <div className="field">
+              <label className="label">Client</label>
+              <div className="control">
+                <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Date</label>
+              <div className="control">
+                <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input name-input"/>
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Start Time</label>
+              <div className="control">
+                <input type="time" className='time-selector' value={startTime} name='startTime' onChange={this.changeHandler}/>
+                <input type="time" className='time-selector' value={endTime} name='endTime' onChange={this.changeHandler}/>
+              </div>
+            </div>
+
+            {!this.isConflicting() ?
+            <Link to='/' className='button is-info' onClick={() => updateAppointment(id, client, date, startTime, endTime)}>Edit Appointment</Link>
+            : <h1>Conflicting dates.</h1>}
+
+            <Link to='/' className='button is-primary'>Home</Link>
+
           </div>
         </div>
-
-        <div className="field">
-          <label className="label is-one-quarter column">Date</label>
-          <div className="control is-one-quarter column">
-            <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input date-input"/>
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label is-one-quarter column">Start Time</label>
-          <div className="control is-one-quarter column">
-            <input type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
-            <input type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
-          </div>
-        </div>
-
-         {!this.isConflicting() ?
-         <Link to='/' className='button is-primary' onClick={() => updateAppointment(id, client, date, startTime, endTime)}>Edit Appointment</Link>
-         : <h1>Conflicting dates.</h1>}
-
-        <Link to='/' className='button is-info'>Home</Link>
       </div>
     )
   }

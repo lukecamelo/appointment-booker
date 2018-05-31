@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { callApi } from '../helpers/helpers'
+import Fade from 'react-reveal/Fade'
 
 import 'bulma/css/bulma.css'
 import './App.css';
 
 import List from './List'
-// import AppointmentForm from '../components/AppointmentForm'
 
 class App extends Component {
   state = {
@@ -69,22 +69,38 @@ class App extends Component {
       console.log(success, message, appointments)
     }
 
-    if (isLoggedIn) {
+    if (isLoggedIn && appointments.length > 0) {
       return (
-        <div className="App container">
-          <div className="card appointment-table">
+        <Fade top cascade>
+          <div className="App container">
+            <div className="card appointment-table">
+              <div className="card-content">
+                <Fade cascade>
+                <h1 className="title">Welcome, {user}!</h1>
+                </Fade>
+                {appointments.length > 0 ? 
+                <Fade cascade>
+                  <List 
+                  response={appointments} 
+                  deleteAppointment={this.deleteAppointment} /> 
+                </Fade>
+                : null}
+                
+                  <Link className='button is-info' to='/form'>Create new Appointment</Link>
+                  <Link className='button is-danger' to='/' onClick={this.logout}>Logout</Link>
+              </div>
+            </div>
+          </div>
+        </Fade>
+      )
+    } else if (isLoggedIn) {
+      return (
+        <div className="container load-container">
+          <div className="card">
             <div className="card-content">
-              <h1 className="title">{user}</h1>
-              {appointments.length > 0 ? 
-
-              <List 
-              response={appointments} 
-              deleteAppointment={this.deleteAppointment} /> 
-
-              : <h1 className='title'>{message}</h1>}
-
-              <Link className='button is-info' to='/form'>Create new Appointment</Link>
-              <Link className='button is-danger' to='/' onClick={this.logout}>Logout</Link>
+              <Fade top cascade>
+                <h1 className="title">Loading...</h1>
+              </Fade>
             </div>
           </div>
         </div>
@@ -93,10 +109,12 @@ class App extends Component {
       return (
       <div className="App container login-doink">
         <div className="card login-card">
+          <Fade cascade>
           <div className="card-content">
             <h1 className="title">Please log in.</h1>
             <Link className='button is-info' to='/login'>Login page</Link>
           </div>
+          </Fade>
         </div>
       </div>
       )

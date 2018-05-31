@@ -18,3 +18,9 @@
 .login-card {
   width: 30%;
 }
+
+.load-container {
+  width: 30%;
+  padding-top: 5rem;
+  text-align: center;
+}

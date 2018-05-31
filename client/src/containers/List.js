@@ -41,7 +41,6 @@ class List extends React.Component {
             {this.props.response.length ? appointments : null}
           </tbody>
         </table>
-      
       </div>
     )
   }

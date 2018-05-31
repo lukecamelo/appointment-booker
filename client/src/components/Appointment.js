@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// import { deleteAppointment } from '../helpers/helpers'
 
 class Appointment extends Component {
 
@@ -14,15 +13,15 @@ class Appointment extends Component {
     const parsedEnd = endTime.split(' ')[4].slice(0, 5)
 
     return (
-      <tr className='Appointment'>
-        <th>{index}</th>
-        <td>{client}</td>
-        <td>{date}</td>
-        <td>{parsedStart}</td>
-        <td>{parsedEnd}</td>
-        <td><a className='button is-danger' onClick={() => deleteAppointment(_id)}>Delete</a></td>
-        <td><Link className='button is-primary' to={`/appointments/${_id}`}>Edit</Link></td>
-      </tr>
+        <tr className='Appointment'>
+          <th>{index}</th>
+          <td>{client}</td>
+          <td>{date}</td>
+          <td>{parsedStart}</td>
+          <td>{parsedEnd}</td>
+          <td><a className='button is-danger' onClick={() => deleteAppointment(_id)}>Delete</a></td>
+          <td><Link className='button is-primary' to={`/appointments/${_id}`}>Edit</Link></td>
+        </tr>
     )
   }
 }
