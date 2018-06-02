@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 const port = process.env.PORT || 8080
 const db = mongoose.connection
 const routes = require('./routes')
+const bcrypt = require('bcrypt-nodejs')
 
 const passport = require('passport')
 const Strategy = require('passport-local').Strategy
@@ -19,21 +20,12 @@ passport.use('local-login', new Strategy(
       if (err) { return cb(err) }
 
       if (!user) {
-        // const user = new User({
-        //   username: username,
-        //   password: password
-        // })
-
-        // user.save((err) => {
-        //   if (err)
-        //     throw err
-        // })
         
         console.log('invalid user/pass')
         return cb(null, false)
       }
 
-      if (user.password != password) { return cb(null, false) }
+      if (!user.validPassword(password) && user.password != password) { return cb(null, false) }
 
       console.log('success!')
       return cb(null, user)
@@ -51,10 +43,10 @@ passport.use('local-signup', new Strategy(
         return done(null, false)
       } else {
 
-        const newUser = new User({
-          username: username,
-          password: password
-        })
+        const newUser = new User()
+
+        newUser.username = username
+        newUser.password = newUser.generateHash(password)
 
         newUser.save((err) => {
           if (err)
