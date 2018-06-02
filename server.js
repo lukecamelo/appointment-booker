@@ -15,13 +15,27 @@ const Strategy = require('passport-local').Strategy
 passport.use(new Strategy(
   function(username, password, cb) {
     User.findOne({ username: username }, (err, user) => {
+
       if (err) { return cb(err) }
-      if (!user) { 
-        console.log('Invalid user/pass')
-        return cb(null, false)
+
+      if (!user) {
+        const user = new User({
+          username: username,
+          password: password
+        })
+
+        user.save((err) => {
+          if (err)
+            throw err
+        })
+        
+        console.log('invalid user/pass')
+        return cb(null, user)
       }
+
       if (user.password != password) { return cb(null, false) }
-      console.log('success?')
+
+      console.log('success!')
       return cb(null, user)
     })
   }
@@ -51,6 +65,7 @@ app.use(passport.session());
 mongoose.connect('mongodb://lukecamelo:password@ds117509.mlab.com:17509/appointment_db', {
   reconnectInterval: 1000
 })
+
 db.on('error', console.error.bind(console, 'connection error:'))
 
 app.get('/login', (req, res) => {
@@ -69,7 +84,6 @@ app.post('/login',
     // console.log(req.session)
     res.redirect('/')
 })
-
 
 app.get('/logout', (req, res) => {
   req.logOut()
