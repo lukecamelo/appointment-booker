@@ -113,6 +113,7 @@ class App extends Component {
           <div className="card-content">
             <h1 className="title">Please log in.</h1>
             <Link className='button is-info' to='/login'>Login page</Link>
+            <Link className='button is-info' to='/signup'>Signup page</Link>
           </div>
           </Fade>
         </div>

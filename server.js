@@ -12,31 +12,58 @@ const routes = require('./routes')
 const passport = require('passport')
 const Strategy = require('passport-local').Strategy
 
-passport.use(new Strategy(
+passport.use('local-login', new Strategy(
   function(username, password, cb) {
     User.findOne({ username: username }, (err, user) => {
 
       if (err) { return cb(err) }
 
       if (!user) {
-        const user = new User({
-          username: username,
-          password: password
-        })
+        // const user = new User({
+        //   username: username,
+        //   password: password
+        // })
 
-        user.save((err) => {
-          if (err)
-            throw err
-        })
+        // user.save((err) => {
+        //   if (err)
+        //     throw err
+        // })
         
         console.log('invalid user/pass')
-        return cb(null, user)
+        return cb(null, false)
       }
 
       if (user.password != password) { return cb(null, false) }
 
       console.log('success!')
       return cb(null, user)
+    })
+  }
+))
+
+passport.use('local-signup', new Strategy(
+  function(username, password, done) {
+    User.findOne({ username: username}, (err, user) => {
+      if (err)
+        return done(err)
+
+      if (user) {
+        return done(null, false)
+      } else {
+
+        const newUser = new User({
+          username: username,
+          password: password
+        })
+
+        newUser.save((err) => {
+          if (err)
+            throw err
+
+          return done(null, newUser)
+        })
+      }
+
     })
   }
 ))
@@ -79,9 +106,15 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
+  passport.authenticate('local-login', { failureRedirect: '/login' }),
   function(req, res) {
     // console.log(req.session)
+    res.redirect('/')
+})
+
+app.post('/signup', 
+  passport.authenticate('local-signup', { failureRedirect: '/signup'}),
+  function(req, res) {
     res.redirect('/')
 })
 

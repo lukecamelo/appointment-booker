@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import AppointmentForm from './components/AppointmentForm';
 import UpdateForm from './components/UpdateForm';
 import Login from './components/Login'
+import Signup from './components/Signup';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Route exact path='/form' component={AppointmentForm} />
       <Route path='/appointments/:id' component={UpdateForm} />
       <Route path='/login' component={Login} />
+      <Route path='/signup' component={Signup} />
     </Switch>
   </BrowserRouter>
 , document.getElementById('root'));
