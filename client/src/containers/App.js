@@ -111,9 +111,10 @@ class App extends Component {
         <div className="card login-card">
           <Fade cascade>
           <div className="card-content">
-            <h1 className="title">Please log in.</h1>
+            <h1 className="title">Presenting my Appointment Booking app!</h1>
+            <h2 className="subtitle">Please login to proceed to the application, or sign up if you do not have an account.</h2>
             <Link className='button is-info' to='/login'>Login page</Link>
-            <Link className='button is-info' to='/signup'>Signup page</Link>
+            <Link className='button is-primary' to='/signup'>Signup page</Link>
           </div>
           </Fade>
         </div>

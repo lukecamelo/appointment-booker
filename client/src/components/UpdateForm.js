@@ -99,7 +99,7 @@ class UpdateForm extends Component {
             <Link to='/' className='button is-info' onClick={() => updateAppointment(id, client, date, startTime, endTime)}>Edit Appointment</Link>
             : <h1>Conflicting dates.</h1>}
 
-            <Link to='/' className='button is-primary'>Home</Link>
+            <Link to='/' className='button is-primary'>Back</Link>
 
           </div>
         </div>
