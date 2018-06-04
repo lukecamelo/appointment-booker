@@ -1,6 +1,8 @@
 import React from 'react'
 import './Login.css'
+
 const Signup = () => {
+
   return (
     <div className='Signup container'>
       <form  className='form login-form card' action="/signup" method="POST">  
@@ -21,6 +23,7 @@ const Signup = () => {
       </form>
     </div>
   )
+  
 }
 
 export default Signup

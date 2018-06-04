@@ -35,10 +35,11 @@ class List extends React.Component {
               <th>Date</th>
               <th>Start time</th>
               <th>End time</th>
+              <th>Controls</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.response.length ? appointments : null}
+            {response.length ? appointments : null}
           </tbody>
         </table>
       </div>

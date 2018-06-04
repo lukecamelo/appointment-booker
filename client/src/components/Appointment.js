@@ -19,8 +19,10 @@ class Appointment extends Component {
           <td>{date}</td>
           <td>{parsedStart}</td>
           <td>{parsedEnd}</td>
-          <td><a className='button is-danger' onClick={() => deleteAppointment(_id)}>Delete</a></td>
-          <td><Link className='button is-primary' to={`/appointments/${_id}`}>Edit</Link></td>
+          <td>
+            <a className='button is-danger' onClick={() => deleteAppointment(_id)}>Delete</a>
+            <Link className='button is-primary' to={`/appointments/${_id}`}>Edit</Link>
+          </td>
         </tr>
     )
   }
