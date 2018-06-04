@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import moment from 'moment';
+import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
 import { addAppointment, callApi } from '../helpers/helpers'
 
@@ -63,6 +63,18 @@ class AppointmentForm extends Component {
     }
   }
 
+  sameClient = () => {
+    const { appointments, client } = this.state
+    const message = ' - This client already has an appointment scheduled.'
+    for (let i = 0; i < appointments.length; i++) {
+      if (client.toLowerCase() === appointments[i].client.toLowerCase()) {
+        return message
+      } else {
+        return false
+      }
+    }
+  }
+
   render() {
 
     const { client, date, endTime, startTime, success, message, appointments } = this.state
@@ -74,39 +86,44 @@ class AppointmentForm extends Component {
 
     return (
       <div className="AppointmentForm container">
-        <div className="card">
-          <div className="card-content">
+        <Fade top>
+          <div className="card">
+            <Fade cascade>
+              <div className="card-content">
 
-            <div className="field">
-              <label className="label">Client</label>
-              <div className="control">
-                <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+                <div className="field">
+                  <label className="label">Client {this.sameClient()}</label>
+                  <div className="control">
+                    <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+                  </div>
+                </div>
+
+                <div className="field">
+                  <label className="label">Date</label>
+                  <div className="control">
+                    <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input date-input"/>
+                  </div>
+                </div>
+
+                <div className="field">
+                  <label className="label">Start Time</label>
+                  <div className="control">
+                    <input className='time-selector' type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
+                    <input className='time-selector' type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
+                  </div>
+                </div>
+
+                {!this.isConflicting() ?
+                <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
+                : <h1>Conflicting dates.</h1>}
+
+
+                <Link className='button is-primary' to='/'>Back</Link>
+
               </div>
-            </div>
-
-            <div className="field">
-              <label className="label">Date</label>
-              <div className="control">
-                <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input date-input"/>
-              </div>
-            </div>
-
-            <div className="field">
-              <label className="label">Start Time</label>
-              <div className="control">
-                <input className='time-selector' type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
-                <input className='time-selector' type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
-              </div>
-            </div>
-
-            {!this.isConflicting() ?
-            <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
-            : <h1>Conflicting dates.</h1>}
-
-            <Link className='button is-primary' to='/'>Back</Link>
-
+            </Fade>
           </div>
-        </div>
+        </Fade>
       </div>
     )
   }

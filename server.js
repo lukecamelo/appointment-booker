@@ -100,8 +100,8 @@ app.get('/login', (req, res) => {
 app.post('/login', 
   passport.authenticate('local-login', { failureRedirect: '/login' }),
   function(req, res) {
-    // console.log(req.session)
     res.redirect('/')
+    return res.json()
 })
 
 app.post('/signup', 

@@ -9,6 +9,18 @@ export const callApi = async () => {
   return body
 }
 
+// export const callLogin = async () => {
+//   const response = await fetch('/login', {
+//     method: 'POST',
+//     headers: { 'Accept': 'application/json', 'Content-type': 'application/json'}
+//   })
+//   const body = await response.json()
+
+//   if (response.status !== 200) throw Error(body.message)
+
+//   return body
+// }
+
 // TODO figure out how to get this to update state in App.js
 export const deleteAppointment = (appointment_id) => {
     fetch('/api/realdata/delete', {
