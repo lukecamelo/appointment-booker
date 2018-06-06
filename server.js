@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const path = require('path')
 const User = require('./model/users')
 const appointmentController = require('./controllers/appointment.controller')
 const userController = require('./controllers/user.controller')
@@ -77,6 +78,7 @@ app.use(require('morgan')('combined'))
 app.use(require('cookie-parser')())
 app.use('/api', routes)
 app.use(require('express-session')({ secret: 'express secret', resave: false, saveUninitialized: false }))
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -115,5 +117,9 @@ app.get('/logout', (req, res) => {
   req.user = null
   res.redirect('/')
 })
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.listen(port, () => console.log(`listening on port ${port}`))
