@@ -57,4 +57,5 @@ export const addAppointment = (client, date, endTime, startTime) => {
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({ client, date, startTime: parsedStart, endTime: parsedEnd })
   })
+  .then(() => console.log('all good')).catch(err => console.log(err))
 }

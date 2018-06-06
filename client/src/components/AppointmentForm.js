@@ -12,7 +12,7 @@ class AppointmentForm extends Component {
     message: '',
     appointments: [],
     client: '',
-    date: {},
+    date: '1970-01-01',
     startTime: '',
     endTime: '',
     response: 0
@@ -33,12 +33,12 @@ class AppointmentForm extends Component {
   }
 
   isConflicting = () => {
-    const { success, appointments, date, startTime, endTime } = this.state
+    const { success, appointments, date, startTime, endTime, client } = this.state
 
     if (success === true) {
       
-      let start = new Date(date + ', ' + startTime + ':00')
-      let end = new Date(date + ', ' + endTime + ':00')
+      let start = Date.parse(date + ', ' + startTime + ':00')
+      let end = Date.parse(date + ', ' + endTime + ':00')
       let increment = 0
 
       for (let i = 0; i < appointments.length; i++) {
@@ -53,8 +53,8 @@ class AppointmentForm extends Component {
           console.log('we good')
         }
       }
-
-      if (increment > 0) {
+          
+      if ( increment > 0 || isNaN(start) || isNaN(end) || !client ) {
         return true
       } else {
         return false
@@ -108,14 +108,14 @@ class AppointmentForm extends Component {
                 <div className="field">
                   <label className="label">Start Time</label>
                   <div className="control">
-                    <input className='time-selector' type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
-                    <input className='time-selector' type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
+                    <input className='time-selector' required type="time" value={startTime} name='startTime' onChange={this.changeHandler}/>
+                    <input className='time-selector' required type="time" value={endTime} name='endTime' onChange={this.changeHandler}/>
                   </div>
                 </div>
 
                 {!this.isConflicting() ?
                 <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
-                : <h1>Conflicting dates.</h1>}
+                : <h1>Invalid appointment.</h1>}
 
 
                 <Link className='button is-primary' to='/'>Back</Link>
