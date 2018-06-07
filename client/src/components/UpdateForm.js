@@ -16,7 +16,8 @@ class UpdateForm extends Component {
     date: {},
     startTime: '',
     endTime: '',
-    response: 0
+    response: 0,
+    hasBeenSet: false
   }
 
   componentDidMount() {
@@ -25,8 +26,25 @@ class UpdateForm extends Component {
         success: res.success,
         message: res.message,
         appointments: res.appoint
-      }))
-      .catch(err => console.log(err))
+      })).catch(err => console.log(err))
+  }
+
+  getEntry = async (appointment_id) => {
+    const { appointments, client, date, startTime, endTime } = this.state
+    const response = await fetch('/api/realdata')
+    const body = await response.json()
+    for(let i = 0; i < body.appoint.length; i++) {
+      console.log(body.appoint[i])
+      if(body.appoint[i]._id === appointment_id) {
+        this.setState({
+          client: appointments[i].client,
+          date: appointments[i].date,
+          startTime: appointments[i].startTime.toString().split(' ')[4].slice(0, 5) + '',
+          endTime: appointments[i].endTime.toString().split(' ')[4].slice(0, 5) + '',
+          hasBeenSet: true
+        })
+      }
+    }
   }
 
   changeHandler = (e) => {
@@ -34,12 +52,12 @@ class UpdateForm extends Component {
   }
 
   isConflicting = () => {
-    const { success, appointments, date, startTime, endTime } = this.state
+    const { success, appointments, date, client, startTime, endTime } = this.state
 
     if (success === true) {
       
-      let start = new Date(date + ', ' + startTime + ':00')
-      let end = new Date(date + ', ' + endTime + ':00')
+      let start = Date.parse(date + ', ' + startTime + ':00')
+      let end = Date.parse(date + ', ' + endTime + ':00')
       let increment = 0
 
       for (let i = 0; i < appointments.length; i++) {
@@ -55,7 +73,7 @@ class UpdateForm extends Component {
         }
       }
 
-      if (increment > 0) {
+      if (increment > 0 || isNaN(start) || isNaN(end) || !client) {
         return true
       } else {
         return false
@@ -66,50 +84,61 @@ class UpdateForm extends Component {
 
   render() {
 
-    let { id, client, date, startTime, endTime } = this.state
+    let { id, client, date, startTime, endTime, success, hasBeenSet } = this.state
     
-    return (
-      <div className='UpdateForm container'>
-        <Fade top>
-          <div className="card">
-            <Fade cascade>
-              <div className="card-content">
+    if(success && !hasBeenSet) {
+      this.getEntry(this.props.match.params.id)
+    }
 
-                <h2 className="title">{id}</h2>
-                <div className="field">
-                  <label className="label">Client</label>
-                  <div className="control">
-                    <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+    if (hasBeenSet) {
+
+      return (
+        <div className='UpdateForm container'>
+          <Fade top>
+            <div className="card">
+              <Fade cascade>
+                <div className="card-content">
+  
+                  <h2 className="title">{id}</h2>
+                  <div className="field">
+                    <label className="label">Client</label>
+                    <div className="control">
+                      <input type="text" name='client' required placeholder='Jane Doe' value={client} onChange={this.changeHandler} className="input name-input"/>
+                    </div>
                   </div>
-                </div>
-
-                <div className="field">
-                  <label className="label">Date</label>
-                  <div className="control">
-                    <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input name-input"/>
+  
+                  <div className="field">
+                    <label className="label">Date</label>
+                    <div className="control">
+                      <input type="date" required value={date} name='date' onChange={this.changeHandler} className="input name-input"/>
+                    </div>
                   </div>
-                </div>
-
-                <div className="field">
-                  <label className="label">Start Time</label>
-                  <div className="control">
-                    <input type="time" className='time-selector' value={startTime} name='startTime' onChange={this.changeHandler}/>
-                    <input type="time" className='time-selector' value={endTime} name='endTime' onChange={this.changeHandler}/>
+  
+                  <div className="field">
+                    <label className="label">Start Time</label>
+                    <div className="control">
+                      <input type="time" className='time-selector' value={startTime} name='startTime' onChange={this.changeHandler}/>
+                      <input type="time" className='time-selector' value={endTime} name='endTime' onChange={this.changeHandler}/>
+                    </div>
                   </div>
+  
+                  {!this.isConflicting() ?
+                  <Link to='/' className='button is-info' onClick={() => updateAppointment(id, client, date, startTime, endTime)}>Edit Appointment</Link>
+                  : <h1>Conflicting dates.</h1>}
+  
+                  <Link to='/' className='button is-primary'>Back</Link>
+  
                 </div>
+              </Fade>
+            </div>
+          </Fade>
+        </div>
+      )
 
-                {!this.isConflicting() ?
-                <Link to='/' className='button is-info' onClick={() => updateAppointment(id, client, date, startTime, endTime)}>Edit Appointment</Link>
-                : <h1>Conflicting dates.</h1>}
+    } else {
+      return <div><h1 className="title">Loading...</h1></div>
+    }
 
-                <Link to='/' className='button is-primary'>Back</Link>
-
-              </div>
-            </Fade>
-          </div>
-        </Fade>
-      </div>
-    )
   }
 }
 

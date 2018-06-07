@@ -32,7 +32,7 @@ class App extends Component {
         if(res.user.username) {
           this.setState({ user: res.user.username, isLoggedIn: true })
         }
-      })
+      }).catch(err => console.log(err))
   }
 
   checkLogin = async () => {
