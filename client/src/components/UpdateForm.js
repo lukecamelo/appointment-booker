@@ -124,7 +124,7 @@ class UpdateForm extends Component {
   
                   {!this.isConflicting() ?
                   <Link to='/' className='button is-info' onClick={() => updateAppointment(id, client, date, startTime, endTime)}>Edit Appointment</Link>
-                  : <h1>Conflicting dates.</h1>}
+                  : <h1 className='title'>Invalid appointment.</h1>}
   
                   <Link to='/' className='button is-primary'>Back</Link>
   

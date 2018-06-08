@@ -115,7 +115,7 @@ class AppointmentForm extends Component {
 
                 {!this.isConflicting() ?
                 <Link to='/' className='button is-info' onClick={() => addAppointment(client, date, endTime, startTime)}>Add Appointment</Link>
-                : <h1>Invalid appointment.</h1>}
+                : <h1 className='title'>Invalid appointment.</h1>}
 
 
                 <Link className='button is-primary' to='/'>Back</Link>
