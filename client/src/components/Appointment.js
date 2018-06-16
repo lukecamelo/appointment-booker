@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import './Appointment.css'
+
 class Appointment extends Component {
 
   render() {

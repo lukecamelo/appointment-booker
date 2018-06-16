@@ -27,7 +27,7 @@ class List extends React.Component {
 
     return (
       <div className="List container">
-        <table className="table is-bordered is-striped is-hoverable has-text-centered appointments">
+        <table className="table is-bordered is-striped is-hoverable has-text-centered is-fullwidth appointments">
           <thead>
             <tr>
               <th>ID</th>

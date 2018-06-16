@@ -4,4 +4,10 @@
 
 .List {
   margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
 }
