@@ -99,7 +99,6 @@ class UpdateForm extends Component {
               <Fade cascade>
                 <div className="card-content">
   
-                  <h2 className="title">{id}</h2>
                   <div className="field">
                     <label className="label">Client</label>
                     <div className="control">

@@ -11,3 +11,9 @@
   margin-right: 1rem;
   margin-bottom: 1rem;
 }
+
+@media screen and (max-width: 950px) {
+  .UpdateForm {
+    width: 75%;
+  }
+}
