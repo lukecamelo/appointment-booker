@@ -16,3 +16,13 @@
   width: 75%;
 }
 
+@media screen and (max-width: 950px) {
+
+  .Login {
+    width: 75%;
+  }
+
+  .login-card {
+    width: 75%;
+  }
+}
