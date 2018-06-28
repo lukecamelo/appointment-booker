@@ -63,11 +63,7 @@ class App extends Component {
 
   render() {
 
-    const { success, message, appointments, user, isLoggedIn } = this.state
-
-    if (success === true) {
-      console.log(success, message, appointments)
-    }
+    const { appointments, user, isLoggedIn } = this.state
 
     if (isLoggedIn && appointments.length > 0) {
       return (

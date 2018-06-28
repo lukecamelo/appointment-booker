@@ -30,11 +30,10 @@ class UpdateForm extends Component {
   }
 
   getEntry = async (appointment_id) => {
-    const { appointments, client, date, startTime, endTime } = this.state
+    const { appointments } = this.state
     const response = await fetch('/api/realdata')
     const body = await response.json()
     for(let i = 0; i < body.appoint.length; i++) {
-      console.log(body.appoint[i])
       if(body.appoint[i]._id === appointment_id) {
         this.setState({
           client: appointments[i].client,
