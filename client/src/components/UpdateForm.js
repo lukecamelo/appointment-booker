@@ -65,10 +65,8 @@ class UpdateForm extends Component {
         const dbEnd = new Date(appointments[i].endTime)
 
         if ((start >= dbStart && start <= dbEnd) || (end >= dbStart && end <= dbEnd)) {
-          console.log('conflict')
           increment++
         } else {
-          console.log('we good')
         }
       }
 

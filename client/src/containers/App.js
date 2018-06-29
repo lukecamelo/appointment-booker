@@ -72,7 +72,7 @@ class App extends Component {
             <div className="card appointment-table">
               <div className="card-content">
                 <Fade cascade>
-                <h1 className="title">Welcome, {user}!</h1>
+                  <h1 className="title">Welcome, {user}!</h1>
                 </Fade>
                 {appointments.length > 0 ? 
                 <Fade cascade>
@@ -106,12 +106,12 @@ class App extends Component {
       <div className="App container login-doink">
         <div className="card login-card">
           <Fade cascade>
-          <div className="card-content">
-            <h1 className="title">Presenting my Appointment Booking app!</h1>
-            <h2 className="subtitle">Please login to proceed to the application, or sign up if you do not have an account.</h2>
-            <Link className='button is-info' to='/login'>Login page</Link>
-            <Link className='button is-primary' to='/signup'>Signup page</Link>
-          </div>
+            <div className="card-content">
+              <h1 className="title">Presenting my Appointment Booking app!</h1>
+              <h2 className="subtitle">Please login to proceed to the application, or sign up if you do not have an account.</h2>
+              <Link className='button is-info' to='/login'>Login page</Link>
+              <Link className='button is-primary' to='/signup'>Signup page</Link>
+            </div>
           </Fade>
         </div>
       </div>
