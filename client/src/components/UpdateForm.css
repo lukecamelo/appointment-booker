@@ -12,8 +12,17 @@
   margin-bottom: 1rem;
 }
 
+.load-container {
+  text-align: center;
+  width: 30%;
+  padding-top: 5rem;
+}
+
 @media screen and (max-width: 950px) {
   .UpdateForm {
+    width: 75%;
+  }
+  .load-container {
     width: 75%;
   }
 }

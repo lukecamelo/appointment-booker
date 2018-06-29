@@ -132,7 +132,15 @@ class UpdateForm extends Component {
       )
 
     } else {
-      return <div><h1 className="title">Loading...</h1></div>
+      return (
+        <div className='container load-container'>
+          <div className='card'>
+            <div className='card-content'>
+              <h1 className="title">Loading...</h1>
+            </div>
+          </div>  
+        </div>
+      )
     }
 
   }
