@@ -8,19 +8,17 @@ module.exports = {
 
 function getUser(req, res) {
   if (req.user) {
-    return res.json({user: req.user})
-  }
-  else {
-    return res.json({user: 'nobody logged in.'})
+    return res.json({ user: req.user })
+  } else {
+    return res.json({ user: 'nobody logged in.' })
   }
   res.redirect('/')
 }
 
 function userLogin(req, res) {
   passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    // console.log(req.session)
-    res.redirect('/')
-  }
+    function(req, res) {
+      // console.log(req.session)
+      res.redirect('/')
+    }
 }
-
