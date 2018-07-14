@@ -38,8 +38,8 @@ class UpdateForm extends Component {
         this.setState({
           client: appointments[i].client,
           date: appointments[i].date,
-          startTime: appointments[i].startTime.toString().split(' ')[4].slice(0, 5) + '',
-          endTime: appointments[i].endTime.toString().split(' ')[4].slice(0, 5) + '',
+          startTime: appointments[i].startTime.toString(), // appointments[i].startTime.toString().split(' ')[4].slice(0, 5) + '',
+          endTime: appointments[i].endTime.toString(), // appointments[i].endTime.toString().split(' ')[4].slice(0, 5) + '',
           hasBeenSet: true
         })
       }
@@ -86,6 +86,7 @@ class UpdateForm extends Component {
     if(success && !hasBeenSet) {
       this.getEntry(this.props.match.params.id)
     }
+    console.log(startTime)
 
     if (hasBeenSet) {
 
