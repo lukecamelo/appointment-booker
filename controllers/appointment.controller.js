@@ -12,15 +12,14 @@ module.exports = {
 function getAppointments(req, res) {
   Appointment.find().exec((err, appoint) => {
     if (err) {
-      return res.json({'success': false, 'message': 'there was an error.'})
+      return res.json({ success: false, message: 'there was an error.' })
     }
 
-    return res.json({'success': true, 'message': 'Nuffin\' here cap.', appoint})
+    return res.json({ success: true, message: "Nuffin' here cap.", appoint })
   })
 }
 
 function newAppointment(req, res) {
-  
   const tempDate = moment().format('HH:mm a')
   const formattedDate = moment(req.body.client, 'yyyy-MM-dd')
 
@@ -31,33 +30,30 @@ function newAppointment(req, res) {
     endTime: req.body.endTime
   })
 
-  appointment.save((err) => {
-    if(err)
-    throw err
+  appointment.save(err => {
+    if (err) throw err
   })
 
   res.redirect('/')
 }
 
 function deleteAppointment(req, res) {
-  Appointment.deleteOne({_id: req.body.id}, (err) => {
-    if (err)
-      throw err
+  Appointment.deleteOne({ _id: req.body.id }, err => {
+    if (err) throw err
   })
   res.redirect('/')
 }
 
 function editAppointment(req, res) {
   const tempDate = moment()
-  Appointment.findOne({_id: req.body.id}, (err, appoint) => {
+  Appointment.findOne({ _id: req.body.id }, (err, appoint) => {
     appoint.client = req.body.client
     appoint.date = req.body.date
     appoint.startTime = req.body.startTime
     appoint.endTime = req.body.endTime
 
-    appoint.save((err) => {
-      if (err)
-        throw err
+    appoint.save(err => {
+      if (err) throw err
     })
   })
   res.redirect('/api')
