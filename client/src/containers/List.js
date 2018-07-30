@@ -4,26 +4,23 @@ import Appointment from '../components/Appointment'
 import './List.css'
 
 class List extends React.Component {
-
   render() {
-
     const { deleteAppointment, response, update } = this.props
     let appointments
 
     if (response.length) {
-
       appointments = response.map((obj, i) => {
         return (
           <Appointment
-          key={i}
-          index={i}
-          appointment={obj}
-          deleteAppointment={deleteAppointment}
-          update={update} />
+            key={i}
+            index={i}
+            appointment={obj}
+            deleteAppointment={deleteAppointment}
+            update={update}
+          />
         )
       })
-    
-    } 
+    }
 
     return (
       <div className="List container">
@@ -38,9 +35,7 @@ class List extends React.Component {
               <th>Controls</th>
             </tr>
           </thead>
-          <tbody>
-            {response.length ? appointments : null}
-          </tbody>
+          <tbody>{response.length ? appointments : null}</tbody>
         </table>
       </div>
     )
