@@ -102,7 +102,6 @@ class UpdateForm extends Component {
     if (success && !hasBeenSet) {
       this.getEntry(this.props.match.params.id)
     }
-    console.log(startTime)
 
     if (hasBeenSet) {
       return (

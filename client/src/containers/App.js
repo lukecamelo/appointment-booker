@@ -64,10 +64,7 @@ class App extends Component {
       const appointments = this.state.appointments.filter(
         appointment => appointment._id !== appointment_id
       )
-      this.setState(
-        { appointments, response: res.status },
-        console.log(this.state.response)
-      )
+      this.setState({ appointments, response: res.status })
     })
   }
 

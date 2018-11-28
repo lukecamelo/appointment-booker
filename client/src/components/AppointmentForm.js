@@ -56,10 +56,8 @@ class AppointmentForm extends Component {
           (start >= dbStart && start <= dbEnd) ||
           (end >= dbStart && end <= dbEnd)
         ) {
-          console.log('conflict')
           increment++
         } else {
-          console.log('we good')
         }
       }
 
@@ -93,11 +91,6 @@ class AppointmentForm extends Component {
       message,
       appointments
     } = this.state
-
-    if (success === true) {
-      console.log(success, message, appointments)
-      console.log(this.isConflicting())
-    }
 
     return (
       <div className="AppointmentForm container">
